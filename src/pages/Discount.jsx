@@ -67,16 +67,16 @@ return (
             />
 
             <input
-            type="date"
+            type="datetime-local"
             placeholder="starting date"
-            value={startDate ? startDate.toISOString().split("T")[0] : ""}
+            value={startDate ? startDate.toISOString().slice(0, -8) : ""}
             onChange={(e) => setStartDate(new Date(e.target.value))}
             />
 
             <input
-            type="date"
+            type="datetime-local"
             placeholder="exp date"
-            value={endDate ? endDate.toISOString().split("T")[0] : ""}
+            value={startDate ? startDate.toISOString().slice(0, -8) : ""}
             onChange={(e) => setEndDate(new Date(e.target.value))}
             />
 
