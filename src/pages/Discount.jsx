@@ -47,8 +47,12 @@ const handleSubmit = async (e) => {
 
 
 const deletePromoCode = async (id) => {
+    try{
     const codeId = doc(db, "Discounts", id);
     await deleteDoc(codeId);
+    } catch(err) {
+        alert(err);
+    }
 };
 
 
@@ -85,23 +89,40 @@ return (
             /> <br />
 
             <button onClick={handleSubmit}>add discount</button>
+            
 
+    <table style={{ margin: "20px" }}>
+        <thead >
+        <tr style={{color:"red"}} >
+            <th>Code</th>
+            <th>NumOfUse</th>
+            <th>Total Discounted Value</th>
+            <th>DiscountValue</th>
+            <th>Starting Date</th>
+            <th>Ending Date</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
 
-        {promoCode.map((Discounts) => {
-            return (
-            <>
-            <h1>code:{Discounts.Code}</h1>
-            <h1>NumOfUse:{Discounts.NumOfUse}</h1>
-            <h1>DiscountValue:{Discounts.DiscountValue}</h1> 
-            <h1>Starting Date:{Discounts.Date}</h1>
-            <h1>Exp Date:{Discounts.Exp}</h1>
-            <button onClick={ () => {deletePromoCode(Discounts.id)}}>
-                    delete promo code
-                    </button>
-            <hr />
-            </>
-        );
-    })}        
+        <tbody>
+        {promoCode.map((discount) => (
+            <tr key={discount.id}>
+            <td>{discount.Code}</td>
+            <td>{discount.NumOfUse}</td>
+            <td>{discount.totalDiscountedValue}</td>
+            <td>{discount.DiscountValue}</td>
+            <td>{discount.Date}</td>
+            <td>{discount.Exp}</td>
+            <td>
+                <button onClick={() => deletePromoCode(discount.id)}>
+                delete promo code
+                </button>
+            </td>
+            </tr>
+        ))}
+        </tbody>
+
+    </table>
     </>
 );
 }
