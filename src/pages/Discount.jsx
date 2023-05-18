@@ -42,16 +42,6 @@ const handleSubmit = async (e) => {
 
 return (
     <>
-    {promoCode.map((Discounts) => {
-        return (
-        <>
-            <h1>code:{Discounts.Code}</h1>
-            <h1>NumOfUse:{Discounts.NumOfUse}</h1>
-            <h1>DiscountValue:{Discounts.DiscountValue}</h1> 
-            <h1>Date:{Discounts.Date}</h1>
-            <h1>Exp:{Discounts.Exp}</h1>
-            
-
             <input
             type="string"
             placeholder="code"
@@ -81,9 +71,20 @@ return (
             />
 
             <button onClick={handleSubmit}>add discount</button>
-        </>
+
+
+        {promoCode.map((Discounts) => {
+            return (
+            <>
+            <h1>code:{Discounts.Code}</h1>
+            <h1>NumOfUse:{Discounts.NumOfUse}</h1>
+            <h1>DiscountValue:{Discounts.DiscountValue}</h1> 
+            <h1>Date:{Discounts.Date}</h1>
+            <h1>Exp:{Discounts.Exp}</h1>
+            <hr />
+            </>
         );
-    })}
+    })}        
     </>
 );
 }
