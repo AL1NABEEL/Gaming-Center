@@ -1,46 +1,91 @@
-import React from "react";
-import { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
-import { collection, query, onSnapshot}from "firebase/firestore";
+import {collection, query, onSnapshot, addDoc, Timestamp, } from "firebase/firestore";
 
 function Discount() {
+const [promoCode, setPromoCode] = useState([]);
+const [code, setCode] = useState("");
+const [discountValue, setDiscountValue] = useState("");
+const [startDate, setStartDate] = useState(null);
+const [endDate, setEndDate] = useState(null);
 
-    const [promoCode,setPromoCode]= useState([]);
+const discountCollectionRef = query(collection(db, "Discounts"));
 
-    useEffect(() => {
-        const discountCollectionRef = query(collection(db, 'Discounts'));
-        onSnapshot(discountCollectionRef, (querySnapshot) => {
-            setPromoCode(
-            querySnapshot.docs.map((doc) => ({
-            ...doc.data(),
-            Date: doc.data().Date.toDate().toLocaleString(),   
-            Exp: doc.data().Exp.toDate().toLocaleString(),
-            // unlike string and number, date type requires this function to be read by react
-            Permittivity: doc.data().Permittivity.path,
-            }))
-        );
-        });
-    }, []);
-    
+useEffect(() => {
+    onSnapshot(discountCollectionRef, (querySnapshot) => {
+    setPromoCode(
+        querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        Date: doc.data().Date.toDate().toLocaleString(),
+        Exp: doc.data().Exp.toDate().toLocaleString(),
+        // unlike string and number, date type requires this function to be read by react
+        }))
+    );
+    });
+}, []);
 
-    return(    
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+    const newStartDate = startDate ? Timestamp.fromDate(startDate) : null;
+    const newEndDate = endDate ? Timestamp.fromDate(endDate) : null;
+    await addDoc(discountCollectionRef, {
+        Code: code,
+        DiscountValue: discountValue, 
+        Date: newStartDate,
+        Exp: newEndDate,
+    });
+    } catch (err) {
+    alert(err);
+    }
+};
+
+return (
     <>
-    {promoCode.map((Discounts)=>{
-        return(
-            <>
-            
+    {promoCode.map((Discounts) => {
+        return (
+        <>
             <h1>code:{Discounts.Code}</h1>
             <h1>NumOfUse:{Discounts.NumOfUse}</h1>
-            <h1>DiscountValue:{Discounts.DiscountValue}</h1>
+            <h1>DiscountValue:{Discounts.DiscountValue}</h1> 
             <h1>Date:{Discounts.Date}</h1>
             <h1>Exp:{Discounts.Exp}</h1>
-            <h1>Permittivity:{Discounts.Permittivity}</h1>
             
-            </>
-        )
+
+            <input
+            type="string"
+            placeholder="code"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            />
+
+            <input
+            type="string"
+            placeholder="discount value"
+            value={discountValue}
+            onChange={(e) => setDiscountValue(e.target.value)}
+            />
+
+            <input
+            type="date"
+            placeholder="starting date"
+            value={startDate ? startDate.toISOString().split("T")[0] : ""}
+            onChange={(e) => setStartDate(new Date(e.target.value))}
+            />
+
+            <input
+            type="date"
+            placeholder="exp date"
+            value={endDate ? endDate.toISOString().split("T")[0] : ""}
+            onChange={(e) => setEndDate(new Date(e.target.value))}
+            />
+
+            <button onClick={handleSubmit}>add discount</button>
+        </>
+        );
     })}
     </>
-    )
+);
 }
-export default Discount;
 
+export default Discount;
