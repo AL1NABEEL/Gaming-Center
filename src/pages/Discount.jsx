@@ -18,8 +18,8 @@ useEffect(() => {
         ...doc.data(),
         Date: doc.data().Date.toDate().toLocaleString(),
         Exp: doc.data().Exp.toDate().toLocaleString(),
-        id:doc.id
         // unlike string and number, date type requires this function to be read by react
+        id:doc.id
         }))
     );
     });
@@ -89,7 +89,7 @@ return (
             /> <br />
 
             <button onClick={handleSubmit}>add discount</button>
-            
+
 
     <table style={{ margin: "20px" }}>
         <thead >
@@ -110,7 +110,7 @@ return (
             <td>{discount.Code}</td>
             <td>{discount.NumOfUse}</td>
             <td>{discount.totalDiscountedValue}</td>
-            <td>{discount.DiscountValue}</td>
+            <td>{discount.DiscountValue}%</td>
             <td>{discount.Date}</td>
             <td>{discount.Exp}</td>
             <td>
