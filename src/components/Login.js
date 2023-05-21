@@ -10,7 +10,11 @@ const LoginForm = () => {
     const handlePasswordChange = (event) => {
       setPassword(event.target.value);
     }
-  
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      console.log('Email:', email);
+      console.log('Password:', password);
+    }
     return (
       <div className="login-form-container">
         <h1>Login</h1>
