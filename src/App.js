@@ -4,9 +4,10 @@ import Register from './components/Register';
 function App() {
   return (
 <>
-{/* <Register/> */}
-    <Login/>
 
+
+    <Login/>
+    <Register/>
 
 </>
 
