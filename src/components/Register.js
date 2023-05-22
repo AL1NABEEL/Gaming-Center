@@ -15,12 +15,6 @@ function Register() {
 
   return (
 
-
-
-
-
-
-    
     <form onSubmit={handleSubmit}>
       <div>
         <label>Username</label>
