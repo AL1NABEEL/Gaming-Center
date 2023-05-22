@@ -1,3 +1,4 @@
+import Register from './Register';
 import React, { useState } from 'react';
 const LoginForm = () => {
     const [email, setEmail] = useState('');

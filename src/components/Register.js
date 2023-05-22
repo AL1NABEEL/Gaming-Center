@@ -1,3 +1,5 @@
+
+import LoginForm from './Login';
 import React, { useState } from 'react';
 
 function Register() {
@@ -12,6 +14,13 @@ function Register() {
   }
 
   return (
+
+
+
+
+
+
+    
     <form onSubmit={handleSubmit}>
       <div>
         <label>Username</label>
@@ -45,8 +54,14 @@ function Register() {
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
       </div>
+
+
       <button type="submit">Register</button>
+      <h4 >Don't have an account ?<u>Login</u> </h4>
+
     </form>
+
+    
   );
 }
 
