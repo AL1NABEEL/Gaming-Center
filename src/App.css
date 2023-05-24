@@ -1,87 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap');
 
-* > * {
-    font-family: "Poppins", cursive;
-    margin: 0;
+*{
+  margin: 0%;
+  padding: 0%;
+  text-decoration: none;
 }
 
-body{
-  background: #0f0c29;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-}
-
-.App {
-  height: 100vh;
+.Container{
   display: flex;
-  justify-content: center;
-  align-items: center;
+}
+main{
+  width: 100%;
+  padding: 20px;
+  background-color: #EBEBEB;
+}
+.Sidebar{
+background-color: #E7E8E8;
+height: 100vh;
+width: 436px !important;
+border-right-style: solid;
+border-color: #D3D4D5;
+}
+.link{
+  display: flex;
+  font-family: 'Bai Jamjuree', sans-serif;
+  color: #1A232C;
+  font-size: 21px;
+  margin: 18px 40px;
+  gap: 14px;
+  opacity: 70%;
+  padding: 14px 20px;
+  border-radius: 25px;
   text-align: center;
-}
 
-.register{
-  max-width: 978px;
-  width: 100vw;
-  display:flex;
-  border: 1px solid #e9ecef;
-  border-radius: 5px;
-  /* box-shadow: 1px 3px 10px #e9ecef; */
-  background-color: white;
 }
-
-.register span{
-  color: #adb5bd;
+.link:hover{
+  background-color: #29323C;
+  color: #E7E8E8;
+  transition: all 0.3s;
+  box-shadow: 0px 1px 8px #29323C;
 }
-
-#form{
-  max-width: 320px;
-  width: 100vw;
-  margin: 2em auto;
-}
-
-#form >  input, .btn{
-  border: 1px solid #e9ecef;
-  padding: .9em 1em;
-}
-
-#form > input:focus{
-  outline: none;
-}
-
-#form > .btn{
-  background-color: #003049;
-  color: #e9ecef;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-.flex{
-  display: flex;
-  gap: 1em;
-}
-
-.flex-col{
-  flex-direction: column;
-}
-
-.register .col-1{
-  margin: auto;
-  padding: 3em 0;
-}
-
-.register .col-2 img{
-  width: 480px;
-  height: 100%;
-  object-fit: cover;
-  align-self: flex-end;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  display: none;
-}
-
-@media screen and (min-width: 860px)  {
-  .register .col-2 img{
-    display: initial;
-  }
+.active{
+  background-color: #29323C;
+  color: #E7E8E8;
+  opacity: 100%;
+  box-shadow: 0px 1px 8px #29323C;
 }
