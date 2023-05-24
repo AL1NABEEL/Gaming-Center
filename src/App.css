@@ -14,6 +14,18 @@ main{
   padding: 20px;
   background-color: #EBEBEB;
 }
+.Logo{
+  display: flex;
+  text-align: center;
+  align-items: center;
+  opacity: 90%;
+  font-family: "Arial Rounded MT Bold";
+  margin: 35px 0px 82px 40px;
+  gap: 6px;
+}
+.Logo p{
+  font-size: 23px;
+}
 .Sidebar{
 background-color: #E7E8E8;
 height: 100vh;
