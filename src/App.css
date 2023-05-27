@@ -1,10 +1,11 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap');
-
+h1,h2,h3{font-weight: 400;}
 *{
   margin: 0%;
   padding: 0%;
   text-decoration: none;
+  
 }
 
 .Container{
@@ -66,7 +67,6 @@ border-color: #D3D4D5;
 
 .Reservation-Container{
   margin: 48px 50px;
-  
 }
 .top-section {
   font-family: 'Bai Jamjuree', sans-serif;
@@ -81,7 +81,7 @@ margin-bottom: 14px;
 .top-section p{
   color: #29323C;
   font-size: 19px;
-  font-weight: regular;
+  font-weight: normal;
   opacity: 70%;
   margin-bottom: 77px;
 }
@@ -106,15 +106,18 @@ margin-bottom: 14px;
  opacity: 90%;
 }
 .ps5-card{
+  letter-spacing: 0.3px;
   background-color: #1B242E;
   border: #C3D2D6 1px solid;
   border-radius: 20px;
   width: 223px;
   height: 150px;
   font-family: 'Bai Jamjuree', sans-serif;
-  font-weight: 400;
+  font-weight: 400px;
   display: inline-flex;
   margin:0px 0px 0px 29px;
+  opacity: 90%;
+  box-shadow: 0px 3px 30px black;
 }
 
 .Timer{
@@ -127,7 +130,9 @@ margin-bottom: 14px;
   color: white;
   font-size: 6px;
   margin-bottom: 6px;
+
 }
+
 .TimerContent{
 align-items: center;
 margin-top: 2px;
@@ -153,13 +158,13 @@ color: white;
 .TimeSystem button {
   background-color: #464F59;
   font-family: 'Bai Jamjuree', sans-serif;
-  font-weight: 400;
+  font-weight: normal;
   width: 81px;
   height: 26px;
   border: #C3D2D6 1px solid;
   border-radius: 20px;
   color: white;
-  font-size: 10px;
+  font-size: 9px;
   align-items: center;
   text-align: center;
   margin-bottom: 6px;

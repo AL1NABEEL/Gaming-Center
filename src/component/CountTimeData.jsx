@@ -1,19 +1,19 @@
 export const CountTimeData = [
 
 {
-    name : 'PS5-1'
+    Name : 'PS5-1'
 },
 {
-    name : 'PS5-2'
+    Name : 'PS5-2'
 },
 {
-    name : 'PS5-3'
+    Name : 'PS5-3'
 },
 {
-    name : 'PS5-4'
+    Name : 'PS5-4'
 },
 {
-    name : 'PS5-5'
+    Name : 'PS5-5'
 },
 
 ]

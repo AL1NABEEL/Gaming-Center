@@ -1,4 +1,4 @@
-import {Reac,useRef,useEffect,useState} from 'react'
+import {React,useRef,useEffect,useState} from 'react'
 import clock from '../Makers project/logo and icons/clock.png'
 import calculator from '../Makers project/logo and icons/calculator.png'
 import PS5TV from '../Makers project/logo and icons/PS5TV.png'
@@ -12,7 +12,7 @@ if ( seconds <=10) seconds = '0'+seconds
 return hours + ':' + minutes + ':' + seconds
 }
 
-function CountTime() {
+function CountTime(Name) {
     const [count, setCount] = useState(0)
     const [active, setActive] = useState(false);
     const [ButtonText, setButtonText] = useState('START')
@@ -51,14 +51,13 @@ const Pause = () => {
     
 }
 
-
   return (
     <div className='TimeSystem'>
         <div className='CardPS5IMG'><img src={PS5TV} width={100} height={100} alt="ps5 tv"/>
         <div className="Timer" id='ImgTime'>
            <div className='TimerImg'> <img src={calculator} width={9} height={9} alt="clock" /></div>
             <div className='PS5Name'>
-           <h2>PS5-1</h2>
+           <h2>{Name.Name}</h2>
             </div>
         </div>
         </div>

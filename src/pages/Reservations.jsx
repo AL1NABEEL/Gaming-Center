@@ -16,7 +16,7 @@ function Reservations() {
             <p>Playstation Seats Reservations</p>
           </div>
           {CountTimeData.map((item,index)=>{
-            return(<div className="ps5-card" key={index}><CountTime/></div>)
+            return(<div className="ps5-card" key={index} ><CountTime Name={item.Name}/></div>)
           })}
           
          </div>
