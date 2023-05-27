@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap');
 
 *{
   margin: 0%;
@@ -10,9 +11,9 @@
   display: flex;
 }
 main{
-  width: 100%;
-  padding: 20px;
   background-color: #EBEBEB;
+  width: 100%;
+  
 }
 .Logo{
   display: flex;
@@ -20,8 +21,9 @@ main{
   align-items: center;
   opacity: 90%;
   font-family: "Arial Rounded MT Bold";
-  margin: 35px 0px 82px 40px;
+  margin: 35px 0px 82px 30px;
   gap: 6px;
+  color: #29323C;
 }
 .Logo p{
   font-size: 23px;
@@ -29,7 +31,7 @@ main{
 .Sidebar{
 background-color: #E7E8E8;
 height: 100vh;
-width: 436px !important;
+width: 336px !important;
 border-right-style: solid;
 border-color: #D3D4D5;
 }
@@ -38,7 +40,7 @@ border-color: #D3D4D5;
   font-family: 'Bai Jamjuree', sans-serif;
   color: #1A232C;
   font-size: 21px;
-  margin: 18px 40px;
+  margin: 18px 30px;
   gap: 14px;
   opacity: 70%;
   padding: 14px 20px;
@@ -57,4 +59,127 @@ border-color: #D3D4D5;
   color: #E7E8E8;
   opacity: 100%;
   box-shadow: 0px 1px 8px #29323C;
+}
+
+
+/* Seat Reservations Page Style */
+
+.Reservation-Container{
+  margin: 48px 50px;
+  
+}
+.top-section {
+  font-family: 'Bai Jamjuree', sans-serif;
+  color: #2E363E;
+}
+.top-section h1{
+font-size: 50px;
+font-weight: bold;
+opacity: 90%;
+margin-bottom: 14px;
+}
+.top-section p{
+  color: #29323C;
+  font-size: 19px;
+  font-weight: regular;
+  opacity: 70%;
+  margin-bottom: 77px;
+}
+.Ps5-container{
+  width: 100%;
+  height: 288px;
+  background-image: linear-gradient(#000000, #1B242E);
+  border-radius: 40px;
+}
+.ps5-logo{
+ padding: 15px 0px 45px 37px;
+ display: flex;
+ align-items: center;
+ text-align: center;
+ gap: 14px;
+}
+.ps5-logo p{
+  font-family: 'Bai Jamjuree', sans-serif;
+ font-size: 18px;
+ font-weight: 600;
+ color:#E7E8E8;
+ opacity: 90%;
+}
+.ps5-card{
+  background-color: #1B242E;
+  border: #C3D2D6 1px solid;
+  border-radius: 20px;
+  width: 223px;
+  height: 150px;
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-weight: 400;
+  display: inline-flex;
+  margin:0px 0px 0px 29px;
+}
+
+.Timer{
+  
+  width: 79px;
+  height: 25px;
+  border: #C3D2D6 1px solid;
+  border-radius: 20px;
+  background-color: #464F59;
+  color: white;
+  font-size: 6px;
+  margin-bottom: 6px;
+}
+.TimerContent{
+align-items: center;
+margin-top: 2px;
+}
+.TimerImg{
+  opacity: 50%;
+  float: left;
+  margin: 7px 5px 0px 6px;
+  
+  
+}
+.Timer p {
+  opacity: 50%;
+
+}
+.Timer h2{
+font-size: 10px;
+color: white;
+
+}
+
+
+.TimeSystem button {
+  background-color: #464F59;
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-weight: 400;
+  width: 81px;
+  height: 26px;
+  border: #C3D2D6 1px solid;
+  border-radius: 20px;
+  color: white;
+  font-size: 10px;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 6px;
+  display: block;
+}
+#StopButton{
+  margin-bottom: 9px; 
+}
+.CardPS5IMG{
+  float: left;
+  margin: 16px 12px 4px 16px;
+}
+.CardContent{
+  float: right;
+  margin: 19px 14px 5px 0px;
+  
+}
+.PS5Name{
+  margin: 5.5px 0px 0px 5em;
+}
+#ImgTime{
+  margin-left: 1.5em;
 }
