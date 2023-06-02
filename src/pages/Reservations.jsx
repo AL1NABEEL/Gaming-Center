@@ -4,6 +4,8 @@ import CountTime from '../component/CountTime'
 import {CountTimeData} from '../component/CountTimeData'
 import computer from "../Makers project/logo and icons/computer.png";
 import { PcVipData } from '../component/PcVipData';
+import calculator from '../Makers project/logo and icons/calculator.png'
+import PS5TV from '../Makers project/logo and icons/PS5TV.png'
 function Reservations() {
 const [arrIndex, setarrIndex] = useState(0)
 
@@ -21,7 +23,17 @@ const [arrIndex, setarrIndex] = useState(0)
             <p>Playstation Seats Reservations</p>
           </div>
           {CountTimeData.map((item,index)=>{
-            return(<div className="ps5-card" key={index} ><CountTime Name={item.Name}/></div>)
+            return(<div className="ps5-card" key={index} >
+            <div className='CardPS5IMG'><img src={PS5TV} width={100} height={100} alt="ps5 tv"/>
+            <div className="Timer" id='ImgTime'>
+            <div className='TimerImg'> <img src={calculator} width={9} height={9} alt="clock" /></div>
+            <div className='PS5Name'>
+            <h2>{item.Name}</h2>
+            </div>
+            </div>
+            </div>
+            <CountTime Name={item.Name}/>
+            </div>)
           })}
           
          </div>
@@ -55,8 +67,11 @@ const [arrIndex, setarrIndex] = useState(0)
             
             return(
             <div key={index}>
-              <div >{item.icon}</div>
-              <p >{item.Name}</p>
+              <div className='PcRep'>
+              <div>{item.icon}</div>
+              <h2 >{item.Name}</h2>
+              </div>
+              <CountTime/>
             </div>)
           })[arrIndex]}
           </div>

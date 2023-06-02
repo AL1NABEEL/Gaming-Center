@@ -53,14 +53,6 @@ const Pause = () => {
 
   return (
     <div className='TimeSystem'>
-        <div className='CardPS5IMG'><img src={PS5TV} width={100} height={100} alt="ps5 tv"/>
-        <div className="Timer" id='ImgTime'>
-           <div className='TimerImg'> <img src={calculator} width={9} height={9} alt="clock" /></div>
-            <div className='PS5Name'>
-           <h2>{Name.Name}</h2>
-            </div>
-        </div>
-        </div>
         <div className='CardContent'>
 
         <div className="Timer">
