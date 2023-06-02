@@ -193,13 +193,54 @@ color: white;
 height: 484px;
 margin-top: 1em;
 }
+.pc-section{
+  display: inline-flex;
+}
+.pc-card{
+  background-color: #1B242E;
+  border: #C3D2D6 1px solid;
+  border-radius: 20px;
+  width: 285px;
+  height: 261px;
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-weight: 400px;
+  opacity: 90%;
+  box-shadow: 0px 3px 30px black;
+  margin: 28px 0px 0px 0px;
+}
+.pc-card img{
+  width: 140px;
+  height: 140px;
+}
 
 .PcVipChairs{
-  display: inline-flex;
-  margin: 0px 0px 0px 16px;
-  float: right;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+  opacity: 80%;
+  text-align: center;
+  gap: 24px;
+  row-gap: 40px;
+  margin: 5px 100px 0px 90px;
+}
+.PcVipChairs button{
+  background-color: unset;
+  border: none;
 }
 .PcVipChairs img{
   height: 50px;
   width: 50px;
+}
+.PcVipChairs p{
+  width: 40px;
+  height: 18px;
+  border: #C3D2D6 1px solid;
+  border-radius: 20px;
+  background-color: #464F59;
+  font-family: 'Bai Jamjuree', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color:#E7E8E8;
+  opacity: 90%;
+  padding-top: 3px;
+  margin:4px 0px 0px 3.5px;
 }
