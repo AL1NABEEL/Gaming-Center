@@ -47,6 +47,10 @@ border-color: #D3D4D5;
   padding: 14px 20px;
   border-radius: 25px;
   text-align: center;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 
 }
 .link:hover{
@@ -54,6 +58,7 @@ border-color: #D3D4D5;
   color: #E7E8E8;
   transition: all 0.3s;
   box-shadow: 0px 1px 8px #29323C;
+  transform: scale(1.1) ;
 }
 .active{
   background-color: #29323C;
@@ -68,6 +73,17 @@ border-color: #D3D4D5;
 .Reservation-Container{
   margin: 40px 50px;
 }
+.Reservation-Container button{
+  opacity: 80%;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.Reservation-Container button:hover{
+  opacity: 100%;
+}
+
 .top-section {
   font-family: 'Bai Jamjuree', sans-serif;
   color: #2E363E;
@@ -90,7 +106,9 @@ margin-bottom: 14px;
   height: 288px;
   background-image: linear-gradient(#000000, #1B242E);
   border-radius: 40px;
+  
 }
+
 .LOGO{
  padding: 15px 0px 45px 37px;
  display: flex;
@@ -118,6 +136,7 @@ margin-bottom: 14px;
   margin:0px 0px 0px 29px;
   opacity: 90%;
   box-shadow: 0px 3px 30px black;
+  
 }
 
 .Timer{
@@ -206,10 +225,20 @@ margin-top: 1em;
   font-weight: 400px;
   opacity: 90%;
   box-shadow: 0px 3px 30px black;
-  margin: 28px 0px 0px 0px;
+  margin: 28px 111px 0px 91px;
 }
 .PcRep{
   float: left;
+  animation: opacity 0.3s;
+
+}
+@keyframes opacity {
+  0%   { opacity: 0% }
+  20%  { opacity: 20%}
+  40%  { opacity: 40%}
+  60%  { opacity: 60%}
+  80%  { opacity: 80%}
+  100% { opacity: 100%;}
 }
 .PcRep h2{
   align-items: center;
@@ -234,15 +263,25 @@ margin-top: 1em;
 .PcVipChairs{
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
-  opacity: 80%;
   text-align: center;
   gap: 24px;
   row-gap: 40px;
-  margin: 5px 100px 0px 90px;
 }
 .PcVipChairs button{
   background-color: unset;
   border: none;
+}
+
+#singleChair{
+  opacity: 60%;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+#singleChair:hover{
+  opacity: 100%;
+  transform: scale(1.1) ;
 }
 .PcVipChairs img{
   height: 50px;
@@ -258,7 +297,44 @@ margin-top: 1em;
   font-size: 11px;
   font-weight: 600;
   color:#E7E8E8;
-  opacity: 90%;
   padding-top: 3px;
   margin:4px 0px 0px 3.5px;
+}
+
+.pcButtonsStyle button{
+  margin: 30px 0px !important;
+  width: 92px;
+  height: 32px;
+  font-size: 12px;
+
+}
+.pcButtonsStyle #timer{
+  width: 90px;
+  height: 30px;
+  border: #C3D2D6 1px solid;
+  border-radius: 20px;
+  background-color: #464F59;
+  color: white;
+  font-size: 6px;
+  margin-bottom: 6px;
+  margin-top: 8px;
+}
+.pcButtonsStyle #timer p{
+  font-size: 7px;
+
+}
+.pcButtonsStyle #timer img{
+  width: 12px;
+  height: 12px;
+  margin-top: 2px;
+
+}
+.pcButtonsStyle #timer h2{
+  font-size: 12px;
+}
+.pcButtonsStyle #timerContent{
+  margin-top: 4px;
+}
+.shift{
+margin-right: 44px;
 }

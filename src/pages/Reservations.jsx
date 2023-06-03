@@ -49,19 +49,6 @@ const [arrIndex, setarrIndex] = useState(0)
           </div>
           <div className="pc-section">
 
-          <div className='PcVipChairs'>
-          {PcVipData.map((item,index)=>{
-            return(
-        
-              <button onClick={(e)=>{setarrIndex(arrIndex=>index)}} value={index} key={index}>
-              <div>{item.icon}</div>
-              <p >{item.Name}</p>
-            </button>
-            
-            )
-          })}
-          </div>
-
           <div className="pc-card">
           {PcVipData.map((item,index)=>{
             
@@ -71,9 +58,20 @@ const [arrIndex, setarrIndex] = useState(0)
               <div>{item.icon}</div>
               <h2 >{item.Name}</h2>
               </div>
-              <CountTime/>
+              <div className="pcButtonsStyle"><CountTime/></div>
             </div>)
           })[arrIndex]}
+          </div>
+
+          <div className='PcVipChairs'>
+          {PcVipData.map((item,index)=>{
+            return(
+            <button id='singleChair' onClick={(e)=>{setarrIndex(arrIndex=>index)}} value={index} key={index} >
+              <div>{item.icon}</div>
+              <p>{item.Name}</p>
+            </button>    
+            )
+          })}
           </div>
 
 

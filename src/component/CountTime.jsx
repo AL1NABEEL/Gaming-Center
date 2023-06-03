@@ -1,14 +1,13 @@
 import {React,useRef,useEffect,useState} from 'react'
 import clock from '../Makers project/logo and icons/clock.png'
 import calculator from '../Makers project/logo and icons/calculator.png'
-import PS5TV from '../Makers project/logo and icons/PS5TV.png'
 const formatTime = (time) => {
 let hours = Math.floor(time / 3600)
 let minutes = Math.floor(time % 3600 / 60)
 let seconds = Math.floor(time % 3600 % 60)
 if ( hours <=10) hours = '0'+hours
 if ( minutes <=10) minutes = '0'+minutes
-if ( seconds <=10) seconds = '0'+seconds
+if ( seconds <10) seconds = '0'+seconds
 return hours + ':' + minutes + ':' + seconds
 }
 
@@ -55,9 +54,9 @@ const Pause = () => {
     <div className='TimeSystem'>
         <div className='CardContent'>
 
-        <div className="Timer">
-           <div className='TimerImg'> <img src={clock} width={9} height={9} alt="clock" /></div>
-            <div className='TimerContent'>
+        <div className="Timer" id='timer'>
+           <div className='TimerImg' id='timerImg'> <img src={clock} width={9} height={9} alt="clock" /></div>
+            <div className='TimerContent' id='timerContent'>
             <p>Time Exploited</p>
            <h2>{formatTime(count)}</h2>
             </div>
@@ -65,7 +64,7 @@ const Pause = () => {
 
             <button  onClick={Start}><h3>{ButtonText}</h3></button>
             <button  onClick={Pause} id='StopButton'><h3>{secondButtonText}</h3></button>
-            <div className="Timer">
+            <div className="Timer" id='timer'>
            <div className='TimerImg'> <img src={calculator} width={9} height={9} alt="clock" /></div>
             <div className='TimerContent'>
             <p>Total Cost</p>

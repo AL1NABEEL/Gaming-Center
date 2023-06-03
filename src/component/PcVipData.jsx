@@ -19,7 +19,7 @@ export const PcVipData = [
         Name : 'VIP-4'
     },
     {
-        icon : <img src={vipChair} alt="chair5"/>,
+        icon : <img className="shift" src={vipChair} alt="chair5"/>,
         Name : 'VIP-5'
     },
     {
@@ -59,7 +59,7 @@ export const PcVipData = [
         Name : 'STD-4'
     },
     {
-        icon : <img src={chair2} alt="chair5"/>,
+        icon : <img className="shift" src={chair2} alt="chair5"/>,
         Name : 'STD-5'
     },
     {
@@ -83,43 +83,43 @@ export const PcVipData = [
         Name : 'STD-10'
     },
     {
-        icon : <img src={chair2} alt="chair1" />,
+        icon : <img src={chair2} alt="chair11" />,
         Name : 'STD-11'
     },
     {
-        icon : <img src={chair2} alt="chair2" />,
+        icon : <img src={chair2} alt="chair12" />,
         Name : 'STD-12'
     },
     {
-        icon : <img src={chair2} alt="chair3" />,
+        icon : <img src={chair2} alt="chair13" />,
         Name : 'STD-13'
     },
     {
-        icon : <img src={chair2} alt="chair4" />,
+        icon : <img src={chair2} alt="chair14" />,
         Name : 'STD-14'
     },
     {
-        icon : <img src={chair2} alt="chair5"/>,
+        icon : <img className="shift" src={chair2} alt="chair15"/>,
         Name : 'STD-15'
     },
     {
-        icon : <img src={chair2} alt="chair6" />,
+        icon : <img src={chair2} alt="chair16" />,
         Name : 'STD-16'
     },
     {
-        icon : <img src={chair2} alt="chair7" />,
+        icon : <img src={chair2} alt="chair17" />,
         Name : 'STD-17'
     },
     {
-        icon : <img src={chair2} alt="chair8" />,
+        icon : <img src={chair2} alt="chair18" />,
         Name : 'STD-18'
     },
     {
-        icon : <img src={chair2} alt="chair9" />,
+        icon : <img src={chair2} alt="chair19" />,
         Name : 'STD-19'
     },
     {
-        icon : <img src={chair2} alt="chair10" />,
+        icon : <img src={chair2} alt="chair20" />,
         Name : 'STD-20'
     }
     ]
