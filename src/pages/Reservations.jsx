@@ -6,9 +6,8 @@ import computer from "../Makers project/logo and icons/computer.png";
 import { PcVipData } from '../component/PcVipData';
 import calculator from '../Makers project/logo and icons/calculator.png'
 import PS5TV from '../Makers project/logo and icons/PS5TV.png'
-function Reservations() {
+function Reservations(e) {
 const [arrIndex, setarrIndex] = useState(0)
-
   return (
     <div className="Reservation-Container">
       
@@ -77,9 +76,10 @@ const [arrIndex, setarrIndex] = useState(0)
 
           </div>
          </div>
-
     </div>
+    
   )
+  
 }
 
 export default Reservations

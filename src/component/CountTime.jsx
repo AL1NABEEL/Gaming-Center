@@ -11,7 +11,7 @@ if ( seconds <10) seconds = '0'+seconds
 return hours + ':' + minutes + ':' + seconds
 }
 
-function CountTime(Name) {
+function CountTime() {
     const [count, setCount] = useState(0)
     const [active, setActive] = useState(false);
     const [ButtonText, setButtonText] = useState('START')
@@ -24,7 +24,7 @@ function CountTime(Name) {
           setCount((count) => count + 1);
         }, 1000);}
         return ()=> clearInterval(timer.current) 
-      });
+      },[active,count,timer]);
 
 
 const Start = () => {
