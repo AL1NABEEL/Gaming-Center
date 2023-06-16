@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import {collection, query, onSnapshot, addDoc, Timestamp, deleteDoc, doc } from "firebase/firestore";
+import { Typography, } from "@mui/material";
+// import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+// import DateFnsUtils from '@date-io/date-fns';
+
 
 function Discount() {
 const [promoCode, setPromoCode] = useState([]);
@@ -10,6 +14,14 @@ const [startDate, setStartDate] = useState(null);
 const [endDate, setEndDate] = useState(null);
 
 const discountCollectionRef = query(collection(db, "Discounts"));
+
+
+// const [selectedDate, setSelectedDate] = React.useState(new Date());
+
+//     const handleDateChange = (date) => {
+//       setSelectedDate(date);
+//     };
+
 
 useEffect(() => {
     onSnapshot(discountCollectionRef, (querySnapshot) => {
@@ -58,6 +70,9 @@ const deletePromoCode = async (id) => {
 
 return (
     <>
+    <Typography variant="h3">Discounts & Prizes</Typography>
+    <Typography variant="subtitle1">Discounts & Prizes</Typography>
+    
     <label>code:</label>
             <input
             type="string"
@@ -110,7 +125,7 @@ return (
             <td>{discount.Code}</td>
             <td>{discount.NumOfUse}</td>
             <td>{discount.totalDiscountedValue}</td>
-            <td>{discount.DiscountValue}%</td>
+            <td>{discount.DiscountValue}</td>
             <td>{discount.Date}</td>
             <td>{discount.Exp}</td>
             <td>
@@ -123,6 +138,16 @@ return (
         </tbody>
 
     </table>
+
+    {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <DatePicker
+      label="Select Date"
+      value={selectedDate}
+      onChange={handleDateChange}
+      format="MM/dd/yyyy"
+    />
+  </MuiPickersUtilsProvider> */}
+
     </>
 );
 }
