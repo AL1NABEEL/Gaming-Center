@@ -72,3 +72,20 @@ border-color: #D3D4D5;
 .Dashboard-container{
   margin: 40px 50px;
 }
+.top-section{
+  font-family: 'Bai Jamjuree', sans-serif;
+  color: #2E363E;
+}
+.top-section h1{
+  font-size: 50px;
+  font-weight: bold;
+  opacity: 90%;
+  margin-bottom: 14px;
+}
+.top-section p{
+  color: #29323C;
+  font-size: 19px;
+  font-weight: normal;
+  opacity: 70%;
+  margin-bottom: 77px;
+}
