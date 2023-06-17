@@ -1,18 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap');
+h1,h2,h3{font-weight: 400;}
 *{
   margin: 0%;
   padding: 0%;
   text-decoration: none;
+  
 }
 
 .Container{
   display: flex;
 }
 main{
-  width: 100%;
-  padding: 20px;
   background-color: #EBEBEB;
+  width: 100%;
+  
 }
 .Logo{
   display: flex;
@@ -20,8 +21,9 @@ main{
   align-items: center;
   opacity: 90%;
   font-family: "Arial Rounded MT Bold";
-  margin: 35px 0px 82px 40px;
+  margin: 35px 0px 82px 30px;
   gap: 6px;
+  color: #29323C;
 }
 .Logo p{
   font-size: 23px;
@@ -29,7 +31,7 @@ main{
 .Sidebar{
 background-color: #E7E8E8;
 height: 100vh;
-width: 436px !important;
+width: 336px !important;
 border-right-style: solid;
 border-color: #D3D4D5;
 }
@@ -38,12 +40,16 @@ border-color: #D3D4D5;
   font-family: 'Bai Jamjuree', sans-serif;
   color: #1A232C;
   font-size: 21px;
-  margin: 18px 40px;
+  margin: 18px 30px;
   gap: 14px;
   opacity: 70%;
   padding: 14px 20px;
   border-radius: 25px;
   text-align: center;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 
 }
 .link:hover{
@@ -51,10 +57,18 @@ border-color: #D3D4D5;
   color: #E7E8E8;
   transition: all 0.3s;
   box-shadow: 0px 1px 8px #29323C;
+  transform: scale(1.1) ;
 }
 .active{
   background-color: #29323C;
   color: #E7E8E8;
   opacity: 100%;
   box-shadow: 0px 1px 8px #29323C;
+}
+
+
+/* Here is Dashboard style */
+
+.Dashboard-container{
+  margin: 40px 50px;
 }

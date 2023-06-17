@@ -21,12 +21,12 @@ export const SidebarData = [
     },
     {
         icon : <EventSeatOutlined/>,
-        title : "Seat Reservations",
+        title : "Reserve Seat",
         path : "/reservations"
     },
     {
         icon : <DiscountOutlined/>,
-        title : "Discounts & Prizes",
+        title : "Discounts",
         path : "/discounts"
     },
     {
