@@ -1,6 +1,7 @@
 import {React,useRef,useEffect,useState} from 'react'
 import clock from '../Makers project/logo and icons/clock.png'
 import calculator from '../Makers project/logo and icons/calculator.png'
+import swal from 'sweetalert';
 const formatTime = (time) => {
 let hours = Math.floor(time / 3600)
 let minutes = Math.floor(time % 3600 / 60)
@@ -26,11 +27,15 @@ function CountTime() {
         return ()=> clearInterval(timer.current) 
       },[active,count,timer]);
 
-
 const Start = () => {
     if(ButtonText === 'START'){
         setActive(true) }
         else {
+          swal({
+            icon: "success",
+            title: "Counting is Completed",
+            text:`Total Cost is ${count}` 
+          })
             setCount(0)
             setActive(false)
             setButtonText ('START')
@@ -49,7 +54,6 @@ const Pause = () => {
     }
     
 }
-
   return (
     <div className='TimeSystem'>
         <div className='CardContent'>
@@ -73,7 +77,6 @@ const Pause = () => {
 
             </div>
         </div>
-            
     </div>
   )
 }
