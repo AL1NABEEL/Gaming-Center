@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import {collection, query, onSnapshot, addDoc, Timestamp, deleteDoc, doc } from "firebase/firestore";
 import { Typography, } from "@mui/material";
-// import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-// import DateFnsUtils from '@date-io/date-fns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+
 
 
 function Discount() {
@@ -12,15 +16,10 @@ const [code, setCode] = useState("");
 const [discountValue, setDiscountValue] = useState("");
 const [startDate, setStartDate] = useState(null);
 const [endDate, setEndDate] = useState(null);
+const [isFormValid, setIsFormValid] = useState(false);
+
 
 const discountCollectionRef = query(collection(db, "Discounts"));
-
-
-// const [selectedDate, setSelectedDate] = React.useState(new Date());
-
-//     const handleDateChange = (date) => {
-//       setSelectedDate(date);
-//     };
 
 
 useEffect(() => {
@@ -37,7 +36,20 @@ useEffect(() => {
     });
 }, []);
 
+
+    useEffect(() => {
+    // Check if all required fields are filled
+    const isValid = code && discountValue && startDate && endDate;
+    setIsFormValid(isValid);
+    }, [code, discountValue, startDate, endDate]);
+
 const handleSubmit = async (e) => {
+
+    if (!isFormValid) {
+        alert("Please fill all required fields");
+        return;
+    }
+
     try {
     const newStartDate = startDate ? Timestamp.fromDate(startDate) : null;
     const newEndDate = endDate ? Timestamp.fromDate(endDate) : null;
@@ -55,6 +67,7 @@ const handleSubmit = async (e) => {
     } catch (err) {
     alert(err);
     }
+    
 };
 
 
@@ -68,42 +81,100 @@ const deletePromoCode = async (id) => {
 };
 
 
+        
 return (
     <>
-    <Typography variant="h3">Discounts & Prizes</Typography>
-    <Typography variant="subtitle1">Discounts & Prizes</Typography>
-    
-    <label>code:</label>
-            <input
-            type="string"
-            placeholder="makers 50"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            /> <br />
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
 
-    <label>discount value:</label>
-            <input
-            type="string"
-            placeholder="10%"
-            value={discountValue}
-            onChange={(e) => setDiscountValue(e.target.value)}
-            /> <br />
+    <Typography variant="h3">Discounts & Prizes</Typography>
+    <Typography variant="subtitle1" >Discounts & Prizes</Typography>
+
+
+    <Box
+    component="form"
+    sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}
+    noValidate
+    autoComplete="off"
+    >
+    
+    
+    <TextField
+        type="string"
+        placeholder="makers 50"
+        value={code}
+        onChange={(e) => setCode(e.target.value)}
+        id="outlined-required"
+        label="Code"
+        defaultValue="Hello World"
+        size="small"
+        required
+        /> 
+
+        <TextField 
+        label="Discount Value"
+        type="number"
+        value={discountValue}
+        onChange={(e) => setDiscountValue(e.target.value)}
+        size="small"
+        placeholder="12%"
+        required
+        /> <br />
 
     <label>starting date:</label>
-            <input
+    <input
             type="datetime-local"
             value={startDate ? startDate.toISOString().slice(0, -8) : ""}
             onChange={(e) => setStartDate(new Date(e.target.value))}
-            /> <br />
+            required
+            /> 
+            {/* <DatePicker 
+            type="datetime-local"
+            value={startDate ? startDate.toISOString().slice(0, -8) : ""}
+            onChange={(e) => setStartDate(new Date(e.target.value))}/> */}
+
+            {/* <DatePicker
+            value={startDate? startDate.toISOString():''}
+            onChange={(date) => setStartDate(date)}
+            /> */}
+
+            {/* <DatePicker
+            value={startDate}
+            onChange={(date) => setStartDate(date)}
+            /> */}
+<br /> <br />
 
     <label>ending date:</label>
             <input
             type="datetime-local"
             value={endDate ? endDate.toISOString().slice(0, -8) : ""}
             onChange={(e) => setEndDate(new Date(e.target.value))}
-            /> <br />
+            required
+            /> 
 
-            <button onClick={handleSubmit}>add discount</button>
+            {/* <DatePicker
+            type="datetime-local"
+            value={endDate ? endDate.toISOString().slice(0, -8) : ""}
+            onChange={(e) => setEndDate(new Date(e.target.value))}
+            /> */}
+
+            {/* <DatePicker
+            value={endDate ? endDate.toISOString():''}
+            onChange={(date) => setEndDate(date)}
+            /> */}
+
+            {/* <DatePicker
+            value={endDate}
+            onChange={(date) => setEndDate(date)}
+            /> */}
+            
+            <br /> <br />
+
+
+            <Button variant="contained" color="success" onClick={handleSubmit}>
+            Add Discount
+            </Button>
+
+    </Box>
 
 
     <table style={{ margin: "20px" }}>
@@ -130,7 +201,7 @@ return (
             <td>{discount.Exp}</td>
             <td>
                 <button onClick={() => deletePromoCode(discount.id)}>
-                delete promo code
+                Delete
                 </button>
             </td>
             </tr>
@@ -138,16 +209,8 @@ return (
         </tbody>
 
     </table>
-
-    {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-    <DatePicker
-      label="Select Date"
-      value={selectedDate}
-      onChange={handleDateChange}
-      format="MM/dd/yyyy"
-    />
-  </MuiPickersUtilsProvider> */}
-
+    
+    </LocalizationProvider>
     </>
 );
 }
