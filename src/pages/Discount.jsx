@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
-import {collection, query, onSnapshot, addDoc, Timestamp, deleteDoc, doc } from "firebase/firestore";
-import { Typography, } from "@mui/material";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
+import {
+  collection,
+  query,
+  onSnapshot,
+  addDoc,
+  Timestamp,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+import { Typography } from "@mui/material";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+
+
+
 
 
 
 function Discount() {
 const [promoCode, setPromoCode] = useState([]);
-const [code, setCode] = useState("");
-const [discountValue, setDiscountValue] = useState("");
-const [startDate, setStartDate] = useState(null);
-const [endDate, setEndDate] = useState(null);
-const [isFormValid, setIsFormValid] = useState(false);
-
 
 const discountCollectionRef = query(collection(db, "Discounts"));
-
 
 useEffect(() => {
     onSnapshot(discountCollectionRef, (querySnapshot) => {
@@ -28,190 +39,160 @@ useEffect(() => {
         querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         Date: doc.data().Date.toDate().toLocaleString(),
-        Exp: doc.data().Exp.toDate().toLocaleString(),
-        // unlike string and number, date type requires this function to be read by react
-        id:doc.id
+          Exp: doc.data().Exp.toDate().toLocaleString(),
+          id: doc.id,
         }))
-    );
+      );
     });
-}, []);
+  }, []);
 
+  const validationSchema = Yup.object().shape({
+    code: Yup.string().required("Code is required"),
+    discountValue: Yup.string().required("Discount Value is required"),
+    startDate: Yup.date().required("Starting Date is required"),
+    endDate: Yup.date().required("Ending Date is required"),
+  });
 
-    useEffect(() => {
-    // Check if all required fields are filled
-    const isValid = code && discountValue && startDate && endDate;
-    setIsFormValid(isValid);
-    }, [code, discountValue, startDate, endDate]);
-
-const handleSubmit = async (e) => {
-
-    if (!isFormValid) {
-        alert("Please fill all required fields");
-        return;
-    }
-
-    try {
-    const newStartDate = startDate ? Timestamp.fromDate(startDate) : null;
-    const newEndDate = endDate ? Timestamp.fromDate(endDate) : null;
-    await addDoc(discountCollectionRef, {
-        Code: code,
-        DiscountValue: discountValue, 
-        Date: newStartDate,
-        Exp: newEndDate,
-    });
-    setCode("");
-    setDiscountValue("");
-    setStartDate(null);
-    setEndDate(null);
-    // to empty the input fields after we press add discount button  
-    } catch (err) {
-    alert(err);
-    }
-    
-};
-
-
-const deletePromoCode = async (id) => {
-    try{
-    const codeId = doc(db, "Discounts", id);
-    await deleteDoc(codeId);
-    } catch(err) {
+  const formik = useFormik({
+    initialValues: {
+      code: "",
+      discountValue: "",
+      startDate: null,
+      endDate: null,
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      try {
+        const newStartDate = values.startDate ? Timestamp.fromDate(values.startDate) : null;
+        const newEndDate = values.endDate  ? Timestamp.fromDate(values.endDate) : null;
+        await addDoc(discountCollectionRef, {
+          Code: values.code,
+          DiscountValue: values.discountValue,
+          Date: newStartDate,
+          Exp: newEndDate,
+        });
+        formik.resetForm();
+      } catch (err) {
         alert(err);
+      }
+    },
+  });
+
+  const deletePromoCode = async (id) => {
+    try {
+      const codeId = doc(db, "Discounts", id);
+      await deleteDoc(codeId);
+    } catch (err) {
+      alert(err);
     }
-};
+  };
 
+  const handleStartDateChange = (date) => {
+    formik.setFieldValue("startDate", date);
+  };
 
-        
-return (
-    <>
+  const handleEndDateChange = (date) => {
+    formik.setFieldValue("endDate", date);
+  };
+
+  return (
+    <div>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
 
-    <Typography variant="h3">Discounts & Prizes</Typography>
-    <Typography variant="subtitle1" >Discounts & Prizes</Typography>
+        <Typography variant="h3">Discounts & Prizes</Typography>
+        <Typography variant="subtitle1">Discounts & Prizes</Typography>
 
-
-    <Box
-    component="form"
-    sx={{'& .MuiTextField-root': { m: 1, width: '25ch' },}}
-    noValidate
-    autoComplete="off"
-    >
-    
-    
-    <TextField
-        type="string"
-        placeholder="makers 50"
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-        id="outlined-required"
-        label="Code"
-        defaultValue="Hello World"
-        size="small"
-        required
+        <Box
+        component="form"
+        sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
+        noValidate
+        autoComplete="off"
+        onSubmit={formik.handleSubmit}
+        >
+        <TextField
+            type="string"
+            placeholder="makers 50"
+            id="code"
+            label="Code"
+            size="small"
+            required
+            {...formik.getFieldProps("code")}
+            error={formik.touched.code && formik.errors.code}
+            helperText={formik.touched.code && formik.errors.code}
         /> 
 
-        <TextField 
-        label="Discount Value"
-        type="number"
-        value={discountValue}
-        onChange={(e) => setDiscountValue(e.target.value)}
-        size="small"
-        placeholder="12%"
-        required
+        <TextField
+            label="Discount Value"
+            type="number"
+            id="discountValue"
+            size="small"
+            placeholder="12%"
+            required
+            {...formik.getFieldProps("discountValue")}
+            error={formik.touched.discountValue && formik.errors.discountValue}
+            helperText={
+            formik.touched.discountValue && formik.errors.discountValue
+            }
         /> <br />
 
-    <label>starting date:</label>
-    <input
+        <label>starting date:</label>
+        <input
             type="datetime-local"
-            value={startDate ? startDate.toISOString().slice(0, -8) : ""}
-            onChange={(e) => setStartDate(new Date(e.target.value))}
+            value={formik.values.startDate? formik.values.startDate.toISOString().slice(0, -8): ""}
+            onChange={(e) => handleStartDateChange(new Date(e.target.value)) }
             required
-            /> 
-            {/* <DatePicker 
+        />
+        <br />
+
+        <label>ending date:</label>
+        <input
             type="datetime-local"
-            value={startDate ? startDate.toISOString().slice(0, -8) : ""}
-            onChange={(e) => setStartDate(new Date(e.target.value))}/> */}
-
-            {/* <DatePicker
-            value={startDate? startDate.toISOString():''}
-            onChange={(date) => setStartDate(date)}
-            /> */}
-
-            {/* <DatePicker
-            value={startDate}
-            onChange={(date) => setStartDate(date)}
-            /> */}
-<br /> <br />
-
-    <label>ending date:</label>
-            <input
-            type="datetime-local"
-            value={endDate ? endDate.toISOString().slice(0, -8) : ""}
-            onChange={(e) => setEndDate(new Date(e.target.value))}
+            value={formik.values.endDate ? formik.values.endDate.toISOString().slice(0, -8) : ""}
+            onChange={(e) => handleEndDateChange(new Date(e.target.value))}
             required
-            /> 
+        /> <br /> <br /> <br />
 
-            {/* <DatePicker
-            type="datetime-local"
-            value={endDate ? endDate.toISOString().slice(0, -8) : ""}
-            onChange={(e) => setEndDate(new Date(e.target.value))}
-            /> */}
-
-            {/* <DatePicker
-            value={endDate ? endDate.toISOString():''}
-            onChange={(date) => setEndDate(date)}
-            /> */}
-
-            {/* <DatePicker
-            value={endDate}
-            onChange={(date) => setEndDate(date)}
-            /> */}
-            
-            <br /> <br />
-
-
-            <Button variant="contained" color="success" onClick={handleSubmit}>
+        <Button variant="contained" color="success" type="submit">
             Add Discount
-            </Button>
+        </Button>
+        </Box>
 
-    </Box>
-
-
-    <table style={{ margin: "20px" }}>
-        <thead >
-        <tr style={{color:"red"}} >
-            <th>Code</th>
-            <th>NumOfUse</th>
-            <th>Total Discounted Value</th>
-            <th>DiscountValue</th>
-            <th>Starting Date</th>
-            <th>Ending Date</th>
-            <th>Actions</th>
-        </tr>
+        
+        <table>
+        <thead>
+            <tr >
+            <th align="center">Code</th>
+            <th align="center">Total Discounted Value</th>
+            <th align="center">DiscountValue</th>
+            <th align="center">Starting Date</th>
+            <th align="center">Ending Date</th>
+            </tr>
         </thead>
 
-        <tbody>
-        {promoCode.map((discount) => (
-            <tr key={discount.id}>
-            <td>{discount.Code}</td>
-            <td>{discount.NumOfUse}</td>
-            <td>{discount.totalDiscountedValue}</td>
-            <td>{discount.DiscountValue}</td>
-            <td>{discount.Date}</td>
-            <td>{discount.Exp}</td>
-            <td>
-                <button onClick={() => deletePromoCode(discount.id)}>
-                Delete
-                </button>
-            </td>
-            </tr>
-        ))}
-        </tbody>
 
-    </table>
-    
+        <tbody >
+            {promoCode.map((discount) => (
+            <tr key={discount.id}>
+                <td align="center">{discount.Code}</td>
+                <td align="center">{discount.totalDiscountedValue}</td>
+                <td align="center">{discount.DiscountValue}</td>
+                <td align="center">{discount.Date}</td>
+                <td align="center">{discount.Exp}</td>
+                <td>
+                <button
+                className="delete"
+                    onClick={() => deletePromoCode(discount.id)}
+                >
+                    Delete
+                </button>
+                </td>
+            </tr>
+            ))}
+        </tbody>
+        </table>
+        
     </LocalizationProvider>
-    </>
+    </div>
 );
 }
 
