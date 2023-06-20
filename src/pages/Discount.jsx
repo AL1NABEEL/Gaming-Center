@@ -17,14 +17,6 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-
-
-
 
 
 
@@ -95,12 +87,13 @@ useEffect(() => {
     formik.setFieldValue("endDate", date);
   };
 
+
   return (
     <div>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
 
-        <Typography variant="h3">Discounts & Prizes</Typography>
-        <Typography variant="subtitle1">Discounts & Prizes</Typography>
+        <Typography variant="h3" align="left" my={2}>Discounts & Prizes</Typography>
+        <Typography variant="h6" align="left" mt={2} mb={10}>Discounts, prizes, other</Typography>
 
         <Box
         component="form"
@@ -150,9 +143,9 @@ useEffect(() => {
             value={formik.values.endDate ? formik.values.endDate.toISOString().slice(0, -8) : ""}
             onChange={(e) => handleEndDateChange(new Date(e.target.value))}
             required
-        /> <br /> <br /> <br />
+        /> <br /> <br /> 
 
-        <Button variant="contained" color="success" type="submit">
+        <Button variant="contained" color="success" type="submit" sx={{ml:30}}>
             Add Discount
         </Button>
         </Box>
