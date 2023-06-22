@@ -92,8 +92,8 @@ useEffect(() => {
     <div>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
 
-        <Typography variant="h3" align="left" my={2}>Discounts & Prizes</Typography>
-        <Typography variant="h6" align="left" mt={2} mb={10}>Discounts, prizes, other</Typography>
+        <Typography variant="h3" align="left" m={2}>Discounts & Prizes</Typography>
+        <Typography variant="subtitle" align="left" m={2} mb={10}>Discounts, prizes, other</Typography>
 
         <Box
         component="form"
@@ -103,6 +103,7 @@ useEffect(() => {
         onSubmit={formik.handleSubmit}
         >
         <TextField
+            style={{m:2}}
             type="string"
             placeholder="makers 50"
             id="code"
