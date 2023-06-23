@@ -1,67 +1,24 @@
-/* .App { */
-  /* text-align: center; */
-  /* background-color: rgb(228, 226, 226);
-margin: 0px;
+@import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap");
+
+h1,
+h2,
+h3 {
+  font-weight: 400;
 }
-table {
-  width: 80%;
-  border-collapse: collapse;
-  margin-left: 10%;
-  margin-right: 10%; 
-  margin-top: 50px;
-}
-
-
-th {
-  padding: 12px 16px;
-  font-weight: bold;
-  
-} */
-
-/* Apply the following styles to the table body */
-/* tbody tr:nth-child(odd) {
-  background-color: #cfcfcf;
-}
-
-td {
-  padding: 12px 16px;
-}
-
-.delete {
-  padding: 10px 20px;
-  font-size: 20px;
-  border-radius: 4px;
-  border: none;
-  background-color: #ff7675;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  text-decoration: none;
-}
-
-.delete:hover {
-  background-color: #ff4d4f;
-} */
-
-
-@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap');
-h1,h2,h3{font-weight: 400;}
-*{
+* {
   margin: 0%;
   padding: 0%;
   text-decoration: none;
-  
 }
 
-.Container{
+.Container {
   display: flex;
 }
-main{
-  background-color: #EBEBEB;
+main {
+  background-color: #ebebeb;
   width: 100%;
-  
 }
-.Logo{
+.Logo {
   display: flex;
   text-align: center;
   align-items: center;
@@ -69,22 +26,22 @@ main{
   font-family: "Arial Rounded MT Bold";
   margin: 35px 0px 82px 30px;
   gap: 6px;
-  color: #29323C;
+  color: #29323c;
 }
-.Logo p{
+.Logo p {
   font-size: 23px;
 }
-.Sidebar{
-background-color: #E7E8E8;
-height: 100vh;
-width: 336px !important;
-border-right-style: solid;
-border-color: #D3D4D5;
+.Sidebar {
+  background-color: #e7e8e8;
+  height: 100vh;
+  width: 336px !important;
+  border-right-style: solid;
+  border-color: #d3d4d5;
 }
-.link{
+.link {
   display: flex;
-  font-family: 'Bai Jamjuree', sans-serif;
-  color: #1A232C;
+  font-family: "Bai Jamjuree", sans-serif;
+  color: #1a232c;
   font-size: 21px;
   margin: 18px 30px;
   gap: 14px;
@@ -96,136 +53,125 @@ border-color: #D3D4D5;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-
 }
-.link:hover{
-  background-color: #29323C;
-  color: #E7E8E8;
+.link:hover {
+  background-color: #29323c;
+  color: #e7e8e8;
   transition: all 0.3s;
-  box-shadow: 0px 1px 8px #29323C;
-  transform: scale(1.1) ;
+  box-shadow: 0px 1px 8px #29323c;
+  transform: scale(1.1);
 }
-.active{
-  background-color: #29323C;
-  color: #E7E8E8;
+.active {
+  background-color: #29323c;
+  color: #e7e8e8;
   opacity: 100%;
-  box-shadow: 0px 1px 8px #29323C;
+  box-shadow: 0px 1px 8px #29323c;
 }
-
 
 /* Seat Reservations Page Style */
 
-.Reservation-Container{
+.Reservation-Container {
   margin: 40px 50px;
 }
-.Reservation-Container button{
+.Reservation-Container button {
   opacity: 80%;
   transition: all 250ms;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
-.Reservation-Container button:hover{
+.Reservation-Container button:hover {
   opacity: 100%;
 }
 
 .top-section {
-  font-family: 'Bai Jamjuree', sans-serif;
-  color: #2E363E;
+  font-family: "Bai Jamjuree", sans-serif;
+  color: #2e363e;
 }
-.top-section h1{
-font-size: 50px;
-font-weight: bold;
-opacity: 90%;
-margin-bottom: 14px;
+.top-section h1 {
+  font-size: 50px;
+  font-weight: bold;
+  opacity: 90%;
+  margin-bottom: 14px;
 }
-.top-section p{
-  color: #29323C;
+.top-section p {
+  color: #29323c;
   font-size: 19px;
   font-weight: normal;
   opacity: 70%;
   margin-bottom: 77px;
 }
-.Main-Container{
+.Main-Container {
   width: 100%;
   height: 288px;
-  background-image: linear-gradient(#000000, #1B242E);
+  background-image: linear-gradient(#000000, #1b242e);
   border-radius: 40px;
-  
 }
 
-.LOGO{
- padding: 15px 0px 45px 37px;
- display: flex;
- align-items: center;
- text-align: center;
- gap: 14px;
+.LOGO {
+  padding: 15px 0px 45px 37px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
 }
-.LOGO p{
-  font-family: 'Bai Jamjuree', sans-serif;
- font-size: 18px;
- font-weight: 600;
- color:#E7E8E8;
- opacity: 90%;
+.LOGO p {
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #e7e8e8;
+  opacity: 90%;
 }
-.ps5-card{
+.ps5-card {
   letter-spacing: 0.3px;
-  background-color: #1B242E;
-  border: #C3D2D6 1px solid;
+  background-color: #1b242e;
+  border: #c3d2d6 1px solid;
   border-radius: 20px;
   width: 223px;
   height: 150px;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: "Bai Jamjuree", sans-serif;
   font-weight: 400px;
   display: inline-flex;
-  margin:0px 0px 0px 29px;
+  margin: 0px 0px 0px 29px;
   opacity: 90%;
   box-shadow: 0px 3px 30px black;
-  
 }
 
-.Timer{
-  
+.Timer {
   width: 79px;
   height: 25px;
-  border: #C3D2D6 1px solid;
+  border: #c3d2d6 1px solid;
   border-radius: 20px;
-  background-color: #464F59;
+  background-color: #464f59;
   color: white;
   font-size: 6px;
   margin-bottom: 6px;
-
 }
 
-.TimerContent{
-align-items: center;
-margin-top: 2px;
+.TimerContent {
+  align-items: center;
+  margin-top: 2px;
 }
-.TimerImg{
+.TimerImg {
   opacity: 50%;
   float: left;
   margin: 7px 5px 0px 6px;
-  
-  
 }
 .Timer p {
   opacity: 50%;
-
 }
-.Timer h2{
-font-size: 10px;
-color: white;
-
+.Timer h2 {
+  font-size: 10px;
+  color: white;
 }
-
 
 .TimeSystem button {
-  background-color: #464F59;
-  font-family: 'Bai Jamjuree', sans-serif;
+  background-color: #464f59;
+  font-family: "Bai Jamjuree", sans-serif;
   font-weight: normal;
   width: 81px;
   height: 26px;
-  border: #C3D2D6 1px solid;
+  border: #c3d2d6 1px solid;
   border-radius: 20px;
   color: white;
   font-size: 9px;
@@ -234,154 +180,159 @@ color: white;
   margin-bottom: 6px;
   display: block;
 }
-#StopButton{
-  margin-bottom: 9px; 
+#StopButton {
+  margin-bottom: 9px;
 }
-.CardPS5IMG{
+.CardPS5IMG {
   float: left;
   margin: 16px 12px 4px 16px;
 }
-.CardContent{
+.CardContent {
   float: right;
   margin: 19px 14px 5px 0px;
-  
 }
-.PS5Name{
+.PS5Name {
   margin: 5.5px 0px 0px 5em;
 }
-#ImgTime{
+#ImgTime {
   margin-left: 1.5em;
 }
 
-#pc{
-height: 484px;
-margin-top: 1em;
+#pc {
+  height: 484px;
+  margin-top: 1em;
 }
-.pc-section{
+.pc-section {
   display: inline-flex;
 }
-.pc-card{
-  background-color: #1B242E;
-  border: #C3D2D6 1px solid;
+.pc-card {
+  background-color: #1b242e;
+  border: #c3d2d6 1px solid;
   border-radius: 20px;
   width: 285px;
   height: 261px;
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: "Bai Jamjuree", sans-serif;
   font-weight: 400px;
   opacity: 90%;
   box-shadow: 0px 3px 30px black;
   margin: 28px 111px 0px 91px;
 }
-.PcRep{
+.PcRep {
   float: left;
   animation: opacity 0.3s;
-
 }
 @keyframes opacity {
-  0%   { opacity: 0% }
-  20%  { opacity: 20%}
-  40%  { opacity: 40%}
-  60%  { opacity: 60%}
-  80%  { opacity: 80%}
-  100% { opacity: 100%;}
+  0% {
+    opacity: 0%;
+  }
+  20% {
+    opacity: 20%;
+  }
+  40% {
+    opacity: 40%;
+  }
+  60% {
+    opacity: 60%;
+  }
+  80% {
+    opacity: 80%;
+  }
+  100% {
+    opacity: 100%;
+  }
 }
-.PcRep h2{
+.PcRep h2 {
   align-items: center;
   text-align: center;
   width: 79px;
   height: 25px;
-  border: #C3D2D6 1px solid;
+  border: #c3d2d6 1px solid;
   border-radius: 20px;
-  background-color: #464F59;
+  background-color: #464f59;
   font-size: 14px;
   color: white;
   padding-top: 5px;
   margin: 0px 0px 41px 48px;
 }
 
-.PcRep img{
+.PcRep img {
   margin: 30px 19px 40px 16px;
   width: 140px;
   height: 140px;
 }
 
-.PcVipChairs{
+.PcVipChairs {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   text-align: center;
   gap: 24px;
   row-gap: 40px;
 }
-.PcVipChairs button{
+.PcVipChairs button {
   background-color: unset;
   border: none;
-  
 }
 
-#singleChair{
+#singleChair {
   opacity: 60%;
   transition: all 250ms;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
-#singleChair:hover{
+#singleChair:hover {
   opacity: 100%;
-  transform: scale(1.1) ;
+  transform: scale(1.1);
 }
-.PcVipChairs img{
+.PcVipChairs img {
   height: 50px;
   width: 50px;
 }
-.PcVipChairs p{
+.PcVipChairs p {
   width: 40px;
   height: 18px;
-  border: #C3D2D6 1px solid;
+  border: #c3d2d6 1px solid;
   border-radius: 20px;
-  background-color: #464F59;
-  font-family: 'Bai Jamjuree', sans-serif;
+  background-color: #464f59;
+  font-family: "Bai Jamjuree", sans-serif;
   font-size: 11px;
   font-weight: 600;
-  color:#E7E8E8;
+  color: #e7e8e8;
   padding-top: 3px;
-  margin:4px 0px 0px 3.5px;
+  margin: 4px 0px 0px 3.5px;
 }
 
-.pcButtonsStyle button{
+.pcButtonsStyle button {
   margin: 30px 0px !important;
   width: 92px;
   height: 32px;
   font-size: 12px;
-
 }
-.pcButtonsStyle #timer{
+.pcButtonsStyle #timer {
   width: 90px;
   height: 30px;
-  border: #C3D2D6 1px solid;
+  border: #c3d2d6 1px solid;
   border-radius: 20px;
-  background-color: #464F59;
+  background-color: #464f59;
   color: white;
   font-size: 6px;
   margin-bottom: 6px;
   margin-top: 8px;
 }
-.pcButtonsStyle #timer p{
+.pcButtonsStyle #timer p {
   font-size: 7px;
-
 }
-.pcButtonsStyle #timer img{
+.pcButtonsStyle #timer img {
   width: 12px;
   height: 12px;
   margin-top: 2px;
-  
-
 }
-.pcButtonsStyle #timer h2{
+.pcButtonsStyle #timer h2 {
   font-size: 12px;
 }
-.pcButtonsStyle #timerContent{
+.pcButtonsStyle #timerContent {
   margin-top: 4px;
 }
-.shift{
-margin-right: 44px;
+.shift {
+  margin-right: 44px;
 }
