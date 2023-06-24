@@ -34,7 +34,7 @@ const Start = () => {
           swal({
             icon: "success",
             title: "Counting is Completed",
-            text:`Total Cost is ${count}` 
+            text:`Total Cost is ${count} IQD` 
           })
             setCount(0)
             setActive(false)
