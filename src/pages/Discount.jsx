@@ -416,12 +416,16 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
+
+
 const Discount = () => {
   const [promoCode, setPromoCode] = useState([]);
   const [error, setError] = useState(null);
+  
+
 
   const discountCollectionRef = query(collection(db, "Discounts"));
-
+// connect to firebase and show data 
   useEffect(() => {
     onSnapshot(discountCollectionRef, (querySnapshot) => {
       setPromoCode(
@@ -433,6 +437,8 @@ const Discount = () => {
     });
   }, []);
 
+
+  // delete promocode function 
   const deletePromoCode = async (id) => {
     try {
       const codeId = doc(db, "Discounts", id);
@@ -442,11 +448,14 @@ const Discount = () => {
     }
   };
 
+
+  // validations for all input fields 
   const validationSchema = yup.object().shape({
     code: yup.string().required("Code is required"),
     discountValue: yup.string().required("Discount value is required"),
     startDate: yup.date().nullable().required("Starting date is required"),
-    endDate: yup.date().nullable().required("Ending date is required"),
+    endDate: yup.date().nullable().min(yup.ref("startDate"), "Ending date should be after the starting date")
+    .required("Ending date is required"),
   });
 
   const formik = useFormik({
@@ -456,11 +465,14 @@ const Discount = () => {
       startDate: null,
       endDate: null,
     },
+
+    // uploading the data to firebase 
     validationSchema: validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
         const newStartDate = values.startDate.toISOString().slice(0, 10);
         const newEndDate = values.endDate.toISOString().slice(0, 10);
+// the lines above changes the date to string and cuts it to 10 inputs only so its stored like DD-MM-YYYY
         await addDoc(discountCollectionRef, {
           Code: values.code,
           DiscountValue: values.discountValue,
@@ -468,23 +480,41 @@ const Discount = () => {
           Exp: newEndDate,
         });
         resetForm();
+        // the line above empties all input field after we press submit 
       } catch (err) {
         alert(err);
       }
     },
   });
 
-  const errorMessage = React.useMemo(() => {
+
+
+  // this is for the starting date error message 
+  const errorMessageStartDate = React.useMemo(() => {
     if (formik.touched.startDate && formik.errors.startDate) {
       return formik.errors.startDate;
     } else if (formik.touched.startDate && !formik.values.startDate) {
       return "Starting date is required";
+    } else {
+      return "";
+    }
+  }, [formik.touched.startDate, formik.errors.startDate, formik.values.startDate]);
+  
+
+
+  // this is for the ending date error message 
+  const errorMessageEndDate = React.useMemo(() => {
+    if (formik.touched.endDate && formik.errors.endDate) {
+      return formik.errors.endDate;
     } else if (formik.touched.endDate && !formik.values.endDate) {
       return "Ending date is required";
     } else {
       return "";
     }
-  }, [formik.touched.startDate, formik.errors.startDate, formik.values.startDate, formik.touched.endDate, formik.values.endDate]);
+  }, [formik.touched.endDate, formik.errors.endDate, formik.values.endDate]);
+  
+  
+  
   
 
   return (
@@ -504,7 +534,6 @@ const Discount = () => {
             type="string"
             placeholder="makers 50"
             {...formik.getFieldProps("code")}
-            id="code"
             label="Code"
             error={formik.touched.code && formik.errors.code ? true : false}
             helperText={formik.touched.code && formik.errors.code}
@@ -515,56 +544,51 @@ const Discount = () => {
             type="number"
             {...formik.getFieldProps("discountValue")}
             placeholder="12%"
-            error={
-              formik.touched.discountValue && formik.errors.discountValue
-                ? true
-                : false
-            }
-            helperText={
-              formik.touched.discountValue && formik.errors.discountValue
-            }
+            error={formik.touched.discountValue && formik.errors.discountValue? true: false}
+            helperText={formik.touched.discountValue && formik.errors.discountValue}
           /> <br />
 
-<DatePicker
-  value={formik.values.startDate}
-  onChange={(date) => {
-    formik.setFieldValue("startDate", date);
-    
-  }}
-  disablePast
-  onError={(newError) => setError(newError)}
-  slotProps={{
-    textField: {
-      error: formik.touched.startDate && formik.errors.startDate ? true : false,
-      helperText:
-        formik.touched.startDate && formik.errors.startDate
+          <DatePicker
+          value={formik.values.startDate}
+          onChange={(date) => {
+          formik.setFieldValue("startDate", date);
+          }}
+          disablePast
+          onError={(newError) => {
+          formik.setFieldError("startDate", newError);
+          setError(newError);
+          }}
+          slotProps={{
+          textField: {
+          error: formik.touched.startDate && formik.errors.startDate ? true : false,
+          helperText:
+          formik.touched.startDate && formik.errors.startDate
           ? formik.errors.startDate
-          : errorMessage,
-    },
-  }}
-  label="Starting Date"
-/>
+          : errorMessageStartDate,
+          },
+          }}
+          label="Starting Date"
+          />
 
-
-<DatePicker
-  value={formik.values.endDate}
-  onChange={(date) => {
-    formik.setFieldValue("endDate", date);
-    formik.setFieldTouched("endDate", true);
-  }}
-  disablePast
-  onError={(newError) => setError(newError)}
-  slotProps={{
-    textField: {
-      error: formik.touched.endDate && formik.errors.endDate ? true : false,
-      helperText:
-        formik.touched.endDate && formik.errors.endDate
+          <DatePicker
+          value={formik.values.endDate}
+          onChange={(date) => formik.setFieldValue("endDate", date)}
+          disablePast
+          onError={(newError) => {
+          formik.setFieldError("endDate", newError);
+          setError(newError);
+          }}
+          slotProps={{
+          textField: {
+          error: formik.touched.endDate && formik.errors.endDate ? true : false,
+          helperText:
+          formik.touched.endDate && formik.errors.endDate
           ? formik.errors.endDate
-          : "",
-    },
-  }}
-  label="Ending Date"
-/>
+          : errorMessageEndDate,
+          },
+          }}
+          label="Ending Date"
+          />
 
 
           <br /> <br />
@@ -605,6 +629,9 @@ const Discount = () => {
             ))}
           </tbody>
         </table>
+     
+     
+     
       </LocalizationProvider>
     </>
   );
