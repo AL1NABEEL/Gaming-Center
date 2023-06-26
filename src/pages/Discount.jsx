@@ -53,7 +53,7 @@ const Discount = () => {
 
   const validationSchema = yup.object().shape({
     code: yup.string().required("Code is required"),
-    discountValue: yup.string().required("Discount value is required"),
+    discountValue: yup.number().required("Discount value is required").min(0,"Discount value cannot be negative" ).max(100, "Discount value cannot exceed 100" ),
     startDate: yup.date().nullable().required("Starting date is required"),
     endDate: yup
       .date()
