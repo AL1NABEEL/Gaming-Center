@@ -20,6 +20,11 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import moreverticon from "../Makers project/more icon/moreverticon.svg";
 import "./Discount.css"
+import swal from 'sweetalert';
+
+
+
+
 
 const Discount = () => {
   const [promoCode, setPromoCode] = useState([]);
@@ -83,6 +88,14 @@ const Discount = () => {
           Date: newStartDate,
           Exp: newEndDate,
         });
+        swal({
+          title: "Discount Added!",
+          text: "Discount has been successfully added.",
+          icon: "success",
+          button: "OK",
+        }).then(() => {
+          resetForm();
+        });        
         resetForm();
       } catch (err) {
         alert(err);
@@ -115,16 +128,34 @@ const Discount = () => {
 
   const handleDelete = async () => {
     if (selectedPromoCodeId) {
-      await deletePromoCode(selectedPromoCodeId);
-      setSelectedPromoCodeId(null); // Clear the selected promo code after deletion
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, the discount will be permanently removed.",
+        icon: "warning",
+        buttons: ["Cancel", "Delete"],
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          deletePromoCode(selectedPromoCodeId);
+          setSelectedPromoCodeId(null); // Clear the selected promo code after deletion
+          swal("Discount deleted!", {
+            icon: "success",
+          });
+        }
+      });
     }
   };
+  
   
 
   const togglePromoCodeStatus = async (id, currentStatus) => {
     try {
       const codeId = doc(db, "Discounts", id);
       await updateDoc(codeId, { status: !currentStatus });
+      swal({
+        title: "PromoCode status have been changed",
+        text:"you have changed the status of the promocode"
+      })
     } catch (err) {
       alert(err);
     }

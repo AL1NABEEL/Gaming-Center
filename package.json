@@ -4,29 +4,22 @@
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^2.16.0",
-
     "@date-io/dayjs": "^2.16.0",
-    "@material-ui/pickers": "^3.3.10",
-    "@mui/lab": "^5.0.0-alpha.134",
-
-    "@mui/x-date-pickers": "^6.8.0",
-
-    "date-fns": "^2.30.0",
-    
-    "firebase": "^9.22.0",
-    "formik": "^2.4.2",
-
-    "yup": "^1.2.0",
-
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@material-ui/pickers": "^3.3.10",
     "@mui/icons-material": "^5.11.16",
+    "@mui/lab": "^5.0.0-alpha.134",
     "@mui/material": "^5.13.2",
     "@mui/styled-engine-sc": "^5.12.0",
+    "@mui/x-date-pickers": "^6.8.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "date-fns": "^2.30.0",
     "dayjs": "^1.11.7",
+    "firebase": "^9.22.0",
+    "formik": "^2.4.2",
     "mdb-react-ui-kit": "^6.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -34,8 +27,8 @@
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.10",
     "sweetalert": "^2.1.2",
-    "web-vitals": "^2.1.4"
-
+    "web-vitals": "^2.1.4",
+    "yup": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
