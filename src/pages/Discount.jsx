@@ -7,6 +7,7 @@ import {
   addDoc,
   deleteDoc,
   doc,
+  updateDoc,
 } from "firebase/firestore";
 import { Typography } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -17,17 +18,18 @@ import Box from "@mui/material/Box";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useFormik } from "formik";
 import * as yup from "yup";
-
-
+import moreverticon from "../Makers project/more icon/moreverticon.svg";
+import "./Discount.css"
 
 const Discount = () => {
   const [promoCode, setPromoCode] = useState([]);
   const [error, setError] = useState(null);
-  
+  const [selectedPromoCodeId, setSelectedPromoCodeId] = useState(null);
+  const [isOptionsVisible, setOptionsVisible] = useState(false);
 
 
   const discountCollectionRef = query(collection(db, "Discounts"));
-// connect to firebase and show data 
+
   useEffect(() => {
     onSnapshot(discountCollectionRef, (querySnapshot) => {
       setPromoCode(
@@ -40,8 +42,6 @@ const Discount = () => {
     });
   }, []);
 
-
-  // delete promocode function 
   const deletePromoCode = async (id) => {
     try {
       const codeId = doc(db, "Discounts", id);
@@ -51,14 +51,18 @@ const Discount = () => {
     }
   };
 
-
-  // validations for all input fields 
   const validationSchema = yup.object().shape({
     code: yup.string().required("Code is required"),
     discountValue: yup.string().required("Discount value is required"),
     startDate: yup.date().nullable().required("Starting date is required"),
-    endDate: yup.date().nullable().min(yup.ref("startDate"), "Ending date should be after the starting date")
-    .required("Ending date is required"),
+    endDate: yup
+      .date()
+      .nullable()
+      .min(
+        yup.ref("startDate"),
+        "Ending date should be after the starting date"
+      )
+      .required("Ending date is required"),
   });
 
   const formik = useFormik({
@@ -68,14 +72,11 @@ const Discount = () => {
       startDate: null,
       endDate: null,
     },
-
-    // uploading the data to firebase 
     validationSchema: validationSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
         const newStartDate = values.startDate.toISOString().slice(0, 10);
         const newEndDate = values.endDate.toISOString().slice(0, 10);
-// the lines above changes the date to string and cuts it to 10 inputs only so its stored like DD-MM-YYYY
         await addDoc(discountCollectionRef, {
           Code: values.code,
           DiscountValue: values.discountValue,
@@ -83,16 +84,12 @@ const Discount = () => {
           Exp: newEndDate,
         });
         resetForm();
-        // the line above empties all input field after we press submit 
       } catch (err) {
         alert(err);
       }
     },
   });
 
-
-
-  // this is for the starting date error message 
   const errorMessageStartDate = React.useMemo(() => {
     if (formik.touched.startDate && formik.errors.startDate) {
       return formik.errors.startDate;
@@ -102,10 +99,7 @@ const Discount = () => {
       return "";
     }
   }, [formik.touched.startDate, formik.errors.startDate, formik.values.startDate]);
-  
 
-
-  // this is for the ending date error message 
   const errorMessageEndDate = React.useMemo(() => {
     if (formik.touched.endDate && formik.errors.endDate) {
       return formik.errors.endDate;
@@ -115,9 +109,40 @@ const Discount = () => {
       return "";
     }
   }, [formik.touched.endDate, formik.errors.endDate, formik.values.endDate]);
+
+
   
+
+  const handleDelete = async () => {
+    if (selectedPromoCodeId) {
+      await deletePromoCode(selectedPromoCodeId);
+      setSelectedPromoCodeId(null); // Clear the selected promo code after deletion
+    }
+  };
   
+
+  const togglePromoCodeStatus = async (id, currentStatus) => {
+    try {
+      const codeId = doc(db, "Discounts", id);
+      await updateDoc(codeId, { status: !currentStatus });
+    } catch (err) {
+      alert(err);
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setOptionsVisible(false);
+    };
   
+    if (isOptionsVisible) {
+      document.addEventListener("click", handleClickOutside);
+    }
+  
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isOptionsVisible]);
   
 
   return (
@@ -147,52 +172,55 @@ const Discount = () => {
             type="number"
             {...formik.getFieldProps("discountValue")}
             placeholder="12%"
-            error={formik.touched.discountValue && formik.errors.discountValue? true: false}
+            error={
+              formik.touched.discountValue && formik.errors.discountValue
+                ? true
+                : false
+            }
             helperText={formik.touched.discountValue && formik.errors.discountValue}
           /> <br />
 
           <DatePicker
-          value={formik.values.startDate}
-          onChange={(date) => {
-          formik.setFieldValue("startDate", date);
-          }}
-          disablePast
-          onError={(newError) => {
-          formik.setFieldError("startDate", newError);
-          setError(newError);
-          }}
-          slotProps={{
-          textField: {
-          error: formik.touched.startDate && formik.errors.startDate ? true : false,
-          helperText:
-          formik.touched.startDate && formik.errors.startDate
-          ? formik.errors.startDate
-          : errorMessageStartDate,
-          },
-          }}
-          label="Starting Date"
+            value={formik.values.startDate}
+            onChange={(date) => {
+              formik.setFieldValue("startDate", date);
+            }}
+            disablePast
+            onError={(newError) => {
+              formik.setFieldError("startDate", newError);
+              setError(newError);
+            }}
+            slotProps={{
+              textField: {
+                error: formik.touched.startDate && formik.errors.startDate ? true : false,
+                helperText:
+                  formik.touched.startDate && formik.errors.startDate
+                    ? formik.errors.startDate
+                    : errorMessageStartDate,
+              },
+            }}
+            label="Starting Date"
           />
 
           <DatePicker
-          value={formik.values.endDate}
-          onChange={(date) => formik.setFieldValue("endDate", date)}
-          disablePast
-          onError={(newError) => {
-          formik.setFieldError("endDate", newError);
-          setError(newError);
-          }}
-          slotProps={{
-          textField: {
-          error: formik.touched.endDate && formik.errors.endDate ? true : false,
-          helperText:
-          formik.touched.endDate && formik.errors.endDate
-          ? formik.errors.endDate
-          : errorMessageEndDate,
-          },
-          }}
-          label="Ending Date"
+            value={formik.values.endDate}
+            onChange={(date) => formik.setFieldValue("endDate", date)}
+            disablePast
+            onError={(newError) => {
+              formik.setFieldError("endDate", newError);
+              setError(newError);
+            }}
+            slotProps={{
+              textField: {
+                error: formik.touched.endDate && formik.errors.endDate ? true : false,
+                helperText:
+                  formik.touched.endDate && formik.errors.endDate
+                    ? formik.errors.endDate
+                    : errorMessageEndDate,
+              },
+            }}
+            label="Ending Date"
           />
-
 
           <br /> <br />
 
@@ -203,43 +231,85 @@ const Discount = () => {
 
         <table style={{ margin: "20px" }}>
           <thead>
-            <tr style={{ color: "red" }}>
+            <tr>
               <th>Code</th>
               <th>Status</th>
               <th>DiscountValue</th>
               <th>Starting Date</th>
               <th>Ending Date</th>
-              <th>Actions</th>
             </tr>
           </thead>
 
           <tbody>
             {promoCode.map((discount) => (
               <tr key={discount.id}>
-
-
                 <td>{discount.Code}</td>
-                <td align="center">  {discount.status ? 
-                <Button variant="outlined" color="success" disableElevation size="small" sx={{borderRadius:5}}> Enabled </Button> 
-                :
-                <Button variant="outlined" color="error" disableElevation size="small" sx={{borderRadius:5}}> Disabled </Button>}
+                <td align="center">
+                  {discount.status ? (
+                    <Button
+                      variant="outlined"
+                      color="success"
+                      disableElevation
+                      size="small"
+                      sx={{ borderRadius: 5 }}
+                    >
+                      Enabled
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      disableElevation
+                      size="small"
+                      sx={{ borderRadius: 5 }}
+                    >
+                      Disabled
+                    </Button>
+                  )}
                 </td>
                 <td>{discount.DiscountValue}</td>
                 <td>{discount.Date}</td>
                 <td>{discount.Exp}</td>
-                <td>
-                  <button onClick={() => deletePromoCode(discount.id)}>
-                    Delete
-                  </button>
+                <td style={{ position: "relative" }}>
+        <img
+          src={moreverticon}
+          alt="more icon"
+          height={35}
+          width={30}
+          className="moreverticon"
+          onClick={(e) => {
+            setSelectedPromoCodeId(discount.id);
+            setOptionsVisible(!isOptionsVisible);
+            e.stopPropagation();
+          }}
+        />
+        {selectedPromoCodeId === discount.id && isOptionsVisible && (
+         <div
+         className="optionsContainer"
+       >
+         <button
+           onClick={() => handleDelete()}
+           className="deletebutton"
+           onMouseEnter={(e) => (e.target.style.backgroundColor = "lightgray")}
+           onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
+         >
+           Delete
+         </button>
+         <button
+           onClick={() => togglePromoCodeStatus(discount.id, discount.status)}
+           className="disableEnable-button"
+           onMouseEnter={(e) => (e.target.style.backgroundColor = "lightgray")}
+           onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
+         >
+           {discount.status ? "Disable" : "Enable"}
+         </button>
+       </div>
+        )}
                 </td>
-                
               </tr>
             ))}
           </tbody>
         </table>
-     
-     
-     
       </LocalizationProvider>
     </>
   );
