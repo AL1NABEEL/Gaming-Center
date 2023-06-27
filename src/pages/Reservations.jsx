@@ -6,6 +6,7 @@ import computer from "../Makers project/logo and icons/computer.png";
 import { PcVipData } from '../component/PcVipData';
 import calculator from '../Makers project/logo and icons/calculator.png'
 import PS5TV from '../Makers project/logo and icons/PS5TV.png'
+import '../pages/Reservations.css';
 function Reservations(e) {
 const [arrIndex, setarrIndex] = useState(0)
   return (
