@@ -177,25 +177,27 @@ const Discount = () => {
   
 
   return (
-    <>
+    <div div className="container">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Typography variant="h3">Discounts & Prizes</Typography>
-        <Typography variant="subtitle1">Discounts & Prizes</Typography>
-
+        {/* <Typography variant="h3">Discounts & Prizes</Typography> */}
+        <h1>Discounts & Prizes</h1>
+        {/* <Typography variant="subtitle1">Discounts & Prizes</Typography> */}
+        <p>Discount, Prize, Other </p>
         <Box
           component="form"
-          sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
+          sx={{ "& .MuiTextField-root": { my: 4, width: "25ch" } }}
           noValidate
           autoComplete="off"
           onSubmit={formik.handleSubmit}
         >
           <TextField
+            label="Code"
             type="string"
             placeholder="makers 50"
             {...formik.getFieldProps("code")}
-            label="Code"
             error={formik.touched.code && formik.errors.code ? true : false}
             helperText={formik.touched.code && formik.errors.code}
+            sx={{mr:4}}
           />
 
           <TextField
@@ -212,6 +214,7 @@ const Discount = () => {
           /> <br />
 
           <DatePicker
+          label="Starting Date"
             value={formik.values.startDate}
             onChange={(date) => {
               formik.setFieldValue("startDate", date);
@@ -230,10 +233,11 @@ const Discount = () => {
                     : errorMessageStartDate,
               },
             }}
-            label="Starting Date"
+            sx={{mr:4}}
           />
 
           <DatePicker
+            label="Ending Date"
             value={formik.values.endDate}
             onChange={(date) => formik.setFieldValue("endDate", date)}
             disablePast
@@ -250,12 +254,11 @@ const Discount = () => {
                     : errorMessageEndDate,
               },
             }}
-            label="Ending Date"
           />
 
-          <br /> <br />
+          {/* <br /> <br /> */}
 
-          <Button variant="contained" color="success" type="submit">
+          <Button variant="contained" color="success" type="submit" sx={{mt:4, ml:10, p:2}}>
             Add Discount
           </Button>
         </Box>
@@ -342,7 +345,7 @@ const Discount = () => {
           </tbody>
         </table>
       </LocalizationProvider>
-    </>
+    </div>
   );
 };
 

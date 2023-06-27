@@ -1,15 +1,17 @@
+.container{
+  margin: 40px 50px;
+
+}
 h1 {
-  font-size: 50px;
-  font-weight: bold;
   opacity: 90%;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Bai Jamjuree", sans-serif;
   color: #2e363e;
   font-weight: 400;
+  font-size: 50px;
+  font-weight: bold;
 }
 p {
   font-family: "Bai Jamjuree", sans-serif;
-  margin-left: 20px;
-  margin-bottom: 50px;
   color: #29323c;
   font-size: 19px;
   font-weight: normal;
@@ -22,6 +24,7 @@ table {
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 50px;
+  font-family: "Bai Jamjuree", sans-serif;
 }
 
 th {
@@ -31,6 +34,9 @@ th {
 
 td {
   padding: 12px 16px;
+  text-align: center;
+  border-top: 1px solid rgb(204, 202, 202);
+  border-bottom: 1px solid rgb(204, 202, 202);
 }
 
 
