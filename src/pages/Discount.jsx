@@ -9,7 +9,6 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
-import { Typography } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import Button from "@mui/material/Button";
@@ -25,7 +24,7 @@ import swal from 'sweetalert';
 
 
 
-
+// setting up constants 
 const Discount = () => {
   const [promoCode, setPromoCode] = useState([]);
   const [error, setError] = useState(null);
@@ -35,6 +34,7 @@ const Discount = () => {
 
   const discountCollectionRef = query(collection(db, "Discounts"));
 
+  // fetching data from firebase 
   useEffect(() => {
     onSnapshot(discountCollectionRef, (querySnapshot) => {
       setPromoCode(
@@ -47,6 +47,8 @@ const Discount = () => {
     });
   }, []);
 
+
+  // delete promocode function 
   const deletePromoCode = async (id) => {
     try {
       const codeId = doc(db, "Discounts", id);
@@ -56,6 +58,8 @@ const Discount = () => {
     }
   };
 
+
+  // validation for the inputs using yup 
   const validationSchema = yup.object().shape({
     code: yup.string().required("Code is required"),
     discountValue: yup.number().required("Discount value is required").min(0,"Discount value cannot be negative" ).max(100, "Discount value cannot exceed 100" ),
@@ -70,6 +74,7 @@ const Discount = () => {
       .required("Ending date is required"),
   });
 
+
   const formik = useFormik({
     initialValues: {
       code: "",
@@ -78,6 +83,7 @@ const Discount = () => {
       endDate: null,
     },
     validationSchema: validationSchema,
+    // uploading data to firebase 
     onSubmit: async (values, { resetForm }) => {
       try {
         const newStartDate = values.startDate.toISOString().slice(0, 10);
@@ -103,6 +109,8 @@ const Discount = () => {
     },
   });
 
+
+  // validation for the starting date datepicker from mui 
   const errorMessageStartDate = React.useMemo(() => {
     if (formik.touched.startDate && formik.errors.startDate) {
       return formik.errors.startDate;
@@ -113,6 +121,8 @@ const Discount = () => {
     }
   }, [formik.touched.startDate, formik.errors.startDate, formik.values.startDate]);
 
+
+  // validation for the ending date datepicker from mui 
   const errorMessageEndDate = React.useMemo(() => {
     if (formik.touched.endDate && formik.errors.endDate) {
       return formik.errors.endDate;
@@ -125,7 +135,7 @@ const Discount = () => {
 
 
   
-
+// this is for the alert when deleting a promocode 
   const handleDelete = async () => {
     if (selectedPromoCodeId) {
       swal({
@@ -147,13 +157,13 @@ const Discount = () => {
   };
   
   
-
+// changing the status of the promocode from disalbed to enabled and vice versa 
   const togglePromoCodeStatus = async (id, currentStatus) => {
     try {
       const codeId = doc(db, "Discounts", id);
       await updateDoc(codeId, { status: !currentStatus });
       swal({
-        title: "PromoCode status have been changed",
+        title: "PromoCode status changed successfully",
         text:"you have changed the status of the promocode"
       })
     } catch (err) {
@@ -161,6 +171,9 @@ const Discount = () => {
     }
   };
 
+
+
+  // without this Block, if you open the options in the moreverticon you will not be able to close it 
   useEffect(() => {
     const handleClickOutside = () => {
       setOptionsVisible(false);
@@ -176,13 +189,16 @@ const Discount = () => {
   }, [isOptionsVisible]);
   
 
+
+
   return (
     <div div className="container">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        {/* <Typography variant="h3">Discounts & Prizes</Typography> */}
+
         <h1>Discounts & Prizes</h1>
-        {/* <Typography variant="subtitle1">Discounts & Prizes</Typography> */}
         <p>Discount, Prize, Other </p>
+
+
         <Box
           component="form"
           sx={{ "& .MuiTextField-root": { my: 4, width: "25ch" } }}
@@ -256,7 +272,7 @@ const Discount = () => {
             }}
           />
 
-          {/* <br /> <br /> */}
+          
 
           <Button variant="contained" color="success" type="submit" sx={{mt:4, ml:10, p:2}}>
             Add Discount
@@ -278,7 +294,7 @@ const Discount = () => {
             {promoCode.map((discount) => (
               <tr key={discount.id}>
                 <td>{discount.Code}</td>
-                <td align="center">
+                <td>
                   {discount.status ? (
                     <Button
                       variant="outlined"
@@ -305,6 +321,7 @@ const Discount = () => {
                 <td>{discount.Date}</td>
                 <td>{discount.Exp}</td>
                 <td style={{ position: "relative" }}>
+
         <img
           src={moreverticon}
           alt="more icon"
