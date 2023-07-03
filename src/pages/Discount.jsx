@@ -20,6 +20,7 @@ import * as yup from "yup";
 import moreverticon from "../Makers project/more icon/moreverticon.svg";
 import "./Discount.css"
 import swal from 'sweetalert';
+import Loading from "../Loading/Loading";
 
 
 
@@ -30,6 +31,7 @@ const Discount = () => {
   const [error, setError] = useState(null);
   const [selectedPromoCodeId, setSelectedPromoCodeId] = useState(null);
   const [isOptionsVisible, setOptionsVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
 
 
   const discountCollectionRef = query(collection(db, "Discounts"));
@@ -44,6 +46,7 @@ const Discount = () => {
           status: doc.data().status,
         }))
       );
+      setLoading(false);
     });
   }, []);
 
@@ -278,7 +281,9 @@ const Discount = () => {
             Add Discount
           </Button>
         </Box>
-
+        {loading ? (
+  <Loading />
+) : (
         <table style={{ margin: "20px" }}>
           <thead>
             <tr>
@@ -360,7 +365,9 @@ const Discount = () => {
               </tr>
             ))}
           </tbody>
+          
         </table>
+        )}
       </LocalizationProvider>
     </div>
   );
