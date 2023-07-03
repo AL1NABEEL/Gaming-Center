@@ -20,7 +20,7 @@ import * as yup from "yup";
 import moreverticon from "../Makers project/more icon/moreverticon.svg";
 import "./Discount.css"
 import swal from 'sweetalert';
-import Loading from "../Loading/Loading";
+// import Loading from "../Loading/Loading";
 
 
 
@@ -282,7 +282,7 @@ const Discount = () => {
           </Button>
         </Box>
         {loading ? (
-  <Loading />
+  <div className="loader"></div>
 ) : (
         <table style={{ margin: "20px" }}>
           <thead>

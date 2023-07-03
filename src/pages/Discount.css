@@ -1,6 +1,5 @@
-.container{
+.container {
   margin: 40px 50px;
-
 }
 h1 {
   opacity: 90%;
@@ -39,41 +38,68 @@ td {
   border-bottom: 1px solid rgb(204, 202, 202);
 }
 
-
-.moreverticon{
+.moreverticon {
   cursor: pointer;
-  
 }
 
-.deletebutton{
+.deletebutton {
   border: none;
   background-color: transparent;
   padding: 10px 20px;
-  width:100px;
+  width: 100px;
   cursor: pointer;
   outline: none;
   transition: background-color 0.3s;
 }
-.moreverticon{
+.moreverticon {
   cursor: pointer;
   border-radius: 50%;
   border: 1px solid #ccc;
   padding: 5px;
   background-color: transparent;
 }
-.optionsContainer{
+.optionsContainer {
   position: absolute;
   margin-top: 10px;
-  background-Color: white;
+  background-color: white;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
   z-index: 9999;
 }
-.disableEnable-button{
+.disableEnable-button {
   border: none;
   background-color: transparent;
   padding: 10px 20px;
-  width:100px ;
-  cursor: pointer ;
-  outline: none ;
-  transition: background-color 0.3s ;
+  width: 100px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
+}
+
+.loader {
+  color:black;
+  font-family: Consolas, Menlo, Monaco, monospace;
+  font-weight: bold;
+  font-size: 78px;
+  opacity: 0.8;
+  height: 200px;
+  margin-top: 50px;
+  margin-left: 40%;
+  margin-right: 50%;
+}
+.loader:before {
+  content: "{";
+  display: inline-block;
+  animation: pulse 0.4s alternate infinite ease-in-out;
+}
+.loader:after {
+  content: "}";
+  display: inline-block;
+  animation: pulse 0.4s 0.3s alternate infinite ease-in-out;
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
 }
