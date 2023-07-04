@@ -196,6 +196,12 @@ const Discount = () => {
 
   return (
     <div div className="container">
+         {loading ? (
+      <>   
+  
+<div className="loader"></div>
+</>  
+) : (
       <LocalizationProvider dateAdapter={AdapterDayjs}>
 
         <h1>Discounts & Prizes</h1>
@@ -281,9 +287,7 @@ const Discount = () => {
             Add Discount
           </Button>
         </Box>
-        {loading ? (
-  <div className="loader"></div>
-) : (
+     
         <table style={{ margin: "20px" }}>
           <thead>
             <tr>
@@ -367,8 +371,9 @@ const Discount = () => {
           </tbody>
           
         </table>
-        )}
+        
       </LocalizationProvider>
+      )}
     </div>
   );
 };
