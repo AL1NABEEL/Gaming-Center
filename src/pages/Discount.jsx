@@ -20,7 +20,7 @@ import * as yup from "yup";
 import moreverticon from "../Makers project/more icon/moreverticon.svg";
 import "./Discount.css"
 import swal from 'sweetalert';
-// import Loading from "../Loading/Loading";
+import Loader from "../Loading/Loader"
 
 
 
@@ -196,11 +196,10 @@ const Discount = () => {
 
   return (
     <div div className="container">
-         {loading ? (
-      <>   
-  
-<div className="loader"></div>
-</>  
+        {loading ? (
+
+        <Loader/>
+
 ) : (
       <LocalizationProvider dateAdapter={AdapterDayjs}>
 

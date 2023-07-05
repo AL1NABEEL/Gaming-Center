@@ -75,35 +75,5 @@ td {
   transition: background-color 0.3s;
 }
 
-.loader {
-  color:black;
-  font-family: Consolas, Menlo, Monaco, monospace;
-  font-weight: bold;
-  font-size: 78px;
-  opacity: 0.8;
-  height: 300px;
-  width: 150px;
-  margin-top: 30%;
-  margin-left: 40%;
-  margin-right: 50%;
-}
-.loader:before {
-  content: "{";
-  display: inline-block;
-  animation: pulse 0.4s alternate infinite ease-in-out;
-}
-.loader:after {
-  content: "}";
-  display: inline-block;
-  animation: pulse 0.4s 0.3s alternate infinite ease-in-out;
-}
-
-@keyframes pulse {
-  to {
-    transform: scale(0.8);
-    opacity: 0.5;
-  }
-}
-
 
 
